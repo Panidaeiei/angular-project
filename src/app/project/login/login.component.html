@@ -27,14 +27,14 @@
                 <input type="checkbox" name="option1"> Remember me
             </label>
 
-            <button class="button" style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+            <button [routerLink]="['/user']" class="button" style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
                 Login
                 <mat-icon class="material-symbols-outlined">
                         login               
                 </mat-icon>
             </button>
 
-            <a href="" style="color: black; margin-top: 35px; font-size: 19px"> Sign up</a>
+            <a  [routerLink]="['/signup']" style="color: black; margin-top: 35px; font-size: 19px"> Sign up</a>
 
         </mat-card>
     </div>

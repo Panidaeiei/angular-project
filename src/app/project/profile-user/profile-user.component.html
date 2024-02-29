@@ -1,0 +1,60 @@
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<mat-toolbar style="height: 70px; background-color: rgb(93, 91, 91);">
+    <a><img style="width: 70px;" src="/assets/img/iconteen.png" alt=""></a>
+    <span style="flex: 1 1 auto;"></span>
+    <button routerLink="" mat-flat-button style="background-color: transparent; color: aliceblue; border: none; ">
+        <span style="font-size: 17px;">Log out</span>
+    </button>
+    <button [routerLink]="['/user']" mat-flat-button
+        style="background-color: transparent; color: aliceblue; border: none; ">
+        <span style="font-size: 17px;">Back</span>
+    </button>
+</mat-toolbar>
+
+<div class="container">
+    <div class="head">
+        <div style="display: flex; flex-direction: row; align-items: center; height: 25%;   ">
+            <div style="display: flex; flex-direction: column;">
+                <img class="imgpro" src="/assets/img/excat1.png" alt="">
+            </div>
+            <div style="display: flex; flex-direction: column; margin-left: 20px;">
+
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <span class="abril-fatface-regular">Panida eieija</span>
+                    <button [routerLink]="['/editpro']" mat-raised-button style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
+                        Edit profile
+                    </button>
+                    <button mat-raised-button style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
+                        Picture ranking 
+                    </button>
+                </div>
+
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <span class="abril-fatface-regular2">Vote : 26k</span>
+                    <mat-icon class="material-symbols-outlined2" style="margin-left: 5px;">
+                        favorite
+                    </mat-icon>
+                </div>
+                <!-- ใส่คำแนะนำ -->
+                <span class="text" >birthday : 28/06/2020 American Shorthair</span>
+
+                <span  class="text" >Add up to 5 photos.</span>
+            </div>
+        </div>
+        <hr style="height: 3px; background-color: rgb(255, 255, 255); border: none; margin-top: 10px;  width: 95%;">
+        <div style="display: flex; flex-direction: row; justify-content: space-between;  margin-left: 170px; margin-right: 170px; margin-top: 30px">
+            <div style=" display: flex; flex-direction: column; align-items: center;">
+              <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
+              <p class="tivote">Vote 2500 ❤️</p>  
+            </div>
+            <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
+            <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
+        </div>
+        <div style="display: flex; flex-direction: row;  margin-top: 20px;  margin-left: 170px;">
+            <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
+            <a href=""><img class="img5" style="margin-left: 150px;" src="/assets/img/buttonpus.png" alt=""></a>
+        </div>
+    </div>
+</div>
