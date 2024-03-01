@@ -22,5 +22,6 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
+  str = "kuy";
 
 }
