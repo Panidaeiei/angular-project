@@ -12,5 +12,29 @@
 
 <div class="container">
     <img class="imgbcat" src="/assets/img/editcatei.png" alt="">
-    
+    <div style="display: flex; flex-direction: row; justify-content: center;">
+        <mat-card class="card">
+            <a href=""><img class="imgpro" src="/assets/img/excat1.png" alt=""></a>
+
+            <span style="margin-right: 55%; margin-top: 30px;">
+                Username
+            </span>
+            <input class="input" matInput placeholder="">
+
+            <span style="margin-right: 41%; margin-top: 30px;">
+                Original password
+            </span>
+            <input class="input" matInput placeholder="">
+
+            <span style="margin-right: 46%; margin-top: 30px;">
+                New password
+            </span>
+            <input class="input" matInput placeholder="">
+
+            <button [routerLink]="['/profileuser']" class="button" style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                Confirm edits
+            </button>
+
+        </mat-card>
+    </div>
 </div>
