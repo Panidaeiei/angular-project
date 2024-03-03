@@ -9,35 +9,38 @@
                     <span class="abril-fatface-regular">Create new account</span>
                     <img style="width: 100px; margin-top: 30px; " src="/assets/img/teencat.png" alt="">
                 </div>
-                <div style="display: flex;flex-direction: column;">
+                <form>
+                     <div style="display: flex;flex-direction: column;">
                     <div class="form-row">
                         <div>
                             <span style="margin-right: 26%; margin-top: 20px;">Username</span>
-                            <input class="input" matInput placeholder="">
+                            <input type="text" class="input" [(ngModel)]="name" [ngModelOptions]="{standalone : true}" matInput placeholder="" id="name" [required]="true">
                         </div>
                     </div>
                     <div class="form-row" style="margin-right: 30px;">
                         <div>
                             <span style="margin-right: 26%; margin-top: 20px;">Email</span>
-                            <input class="input" matInput placeholder="">
+                            <input type="email" class="input" [(ngModel)]="email"  [ngModelOptions]="{standalone : true}" matInput placeholder="" id="email" [required]="true">
                         </div>
                     </div>
                     <div class="form-row" >
                         <div>
                             <span style="margin-right: 26%; margin-top: 20px;">Password</span>
-                            <input class="input" matInput placeholder="">
+                            <input type="text" class="input" [(ngModel)]="password"  [ngModelOptions]="{standalone : true}" matInput placeholder="" id="password" [required]="true">
                         </div>
                     </div>
                     <div class="form-row">
                         <div style="margin-right: 70px;"> 
-
-                            <button class="button"
+                             
+                            <button  [routerLink]="['/login']" type="submit" class="button" (click)="sign_up()"
                             style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
                             Sign up
                         </button>
                     </div>
                     </div>
                 </div>
+                </form>
+               
             </div>
 
         </div>
