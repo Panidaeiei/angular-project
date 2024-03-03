@@ -5,6 +5,7 @@ import { MainComponent } from './project/main/main.component';
 import { UserComponent } from './project/user/user.component';
 import { ProfileUserComponent } from './project/profile-user/profile-user.component';
 import { EditProfileuserComponent } from './project/edit-profileuser/edit-profileuser.component';
+import { PagetopComponent } from './project/pagetop/pagetop.component';
 
 export const routes: Routes = [
     {path: 'login' , component : LoginComponent},
@@ -12,5 +13,6 @@ export const routes: Routes = [
     {path: '' , component : MainComponent},
     {path: 'user', component : UserComponent},
     {path: 'profileuser', component : ProfileUserComponent},
-    {path: 'editpro', component : EditProfileuserComponent}
+    {path: 'editpro', component : EditProfileuserComponent},
+    {path: 'top10' , component : PagetopComponent}
 ];

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet,RouterLink } from '@angular/router';
+import { RouterOutlet,RouterLink,Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,7 +27,7 @@ import { RouterModule} from '@angular/router';
 })
 export class SignupComponent {
 
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient,private router: Router){}
 
   name:any="";
   email:any="";
@@ -49,5 +49,15 @@ sign_up() {
 console.log(result);
 
  })
+}
+
+validateAndSignUp() {
+  if (!(this.name && this.email && this.password)) {
+      alert("Please fill in all fields before signing up.");
+      this.router.navigate(['/signup']);
+  } else {
+      // Call your sign up function here
+      this.sign_up();
+  }
 }
 }
