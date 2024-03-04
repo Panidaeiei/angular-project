@@ -8,7 +8,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RouterModule} from '@angular/router';
 @Component({
   selector: 'app-signup',
