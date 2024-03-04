@@ -10,7 +10,7 @@
             <span style="margin-right: 55%; margin-top: 40px;">
                 Username
             </span>
-            <input class="input" matInput placeholder="">
+            <input type="text" class="input" [(ngModel)]="name" [ngModelOptions]="{standalone : true}" matInput placeholder="" id="name" [required]="true">
             <mat-icon class="material-symbols-outlined" style="margin-top: -35px; margin-left: 60%; font-size: 25px;">
                 pets
             </mat-icon>
@@ -18,7 +18,7 @@
             <span style="margin-right: 55%; margin-top: 40px;">
                 Password
             </span>
-            <input class="input" matInput placeholder="">
+            <input type="text" class="input" [(ngModel)]="password" [ngModelOptions]="{standalone : true}" matInput placeholder="" id="password" [required]="true">
             <mat-icon class="material-symbols-outlined" style="margin-top: -35px; margin-left: 60%; font-size: 25px;">
                 lock
             </mat-icon>
@@ -27,7 +27,7 @@
                 <input type="checkbox" name="option1"> Remember me
             </label>
 
-            <button [routerLink]="['/user']" class="button" style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+            <button (click)="check()" class="button" style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
                 Login
                 <mat-icon class="material-symbols-outlined">
                         login               
