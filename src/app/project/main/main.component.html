@@ -26,7 +26,7 @@
 
     <div class="vote">
         <div style="display: flex;flex-direction: column; margin-left: 200px; ">
-            <a href="/" (click)="find(this.Catresult[0]?.id,this.Catresult[1]?.id)" (click)="calculateEloRating(this.Catresult[0]?.id,this.Catresult[1]?.id)" style="text-decoration: none; ">
+            <a href="/" (click)="find(this.Catresult[0]?.id,this.Catresult[1]?.id)"  style="text-decoration: none; ">
                 <mat-card style="width: 350px; height: 520px; align-items: center;">
                     <img class="img" src="{{this.Catresult[0]?.image}}" alt="">
                     <div style="display: flex; flex-direction: row; align-items: center; margin-top: -30px;">
@@ -47,7 +47,7 @@
 
         <div style="display: flex;flex-direction: column; ">
             
-            <a (click)="find(this.Catresult[1]?.id,this.Catresult[0]?.id)"  (click)="calculateEloRating(this.Catresult[1]?.id,this.Catresult[0]?.id)" style="text-decoration: none; ">
+            <a href="/" (click)="find(this.Catresult[1]?.id,this.Catresult[0]?.id)"   style="text-decoration: none; ">
                 <mat-card style="width: 350px; height: 520px; align-items: center; margin-right: 200px;">
                     <img class="img" src="{{this.Catresult[1]?.image}}" alt="">
                     <div style="display: flex; flex-direction: row; align-items: center; margin-top: -30px;">

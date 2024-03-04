@@ -6,6 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { lastValueFrom } from 'rxjs';
+import { CatModel } from '../../model';
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -23,7 +25,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 })
 export class MainComponent {
   k: any = 32;
-  win: any;
+  win: number = 0;
   lose: number = 0;
   truevaluewin: number = 0;
   truevaluelose: number = 0;
@@ -49,34 +51,45 @@ export class MainComponent {
     });
   }
 
-  find(id: any, id2: any) {
+ async find(id: any, id2: any){
     const catID = id;
     const catID2 = id2;
-    this.http.get(`http://localhost:3000/upscore/${catID}`).subscribe((result: any) => {
-      this.win = result;
-      console.log("re1"+this.win);
-    });
-    this.http.get(`http://localhost:3000/upscore/${catID2}`).subscribe((result: any) => {
-      this.lose = result.score;
-      console.log(result);
-    });
-    return;
+    const url = `http://localhost:3000/upscore/${catID}`;
+    const data = await lastValueFrom(this.http.get(url));
+    const url2 = `http://localhost:3000/upscore/${catID2}`;
+    let data2 = await lastValueFrom(this.http.get(url2));
+  console.log(data);
+  console.log(data2);
+    // this.win = JSON.stringify(data);
+     let  win = data as  CatModel[];
+     let  lose = data2 as  CatModel[];
+     console.log(win);
+    // this.http.get(`http://localhost:3000/upscore/${catID}`).subscribe((result: any) => {
+    //   this.win = result[0]?.score;
+    //   console.log(this.win);
+    // });
+    // this.http.get(`http://localhost:3000/upscore/${catID2}`).subscribe((result: any) => {
+    //   this.lose = result[0]?.score;
+    //   console.log(this.lose);
+    // });
+    this.calculateEloRating(id,id2,win[0].score,lose[0].score);
   }
 
-  calculateEloRating(id: any, id2: any) {
+  calculateEloRating(id: any, id2: any,win:any,lose:any) {
     //elo algorihtm
  // Calculate the expected win probability for the winner (always 1)
 this.truevaluewin = 1;
-this.hopewin = 1 / (1 + 10**(- (this.win - this.lose) / 400));
-this.newwin = this.win + this.k * (this.truevaluewin - this.hopewin);
+this.hopewin = 1 / (1 + 10**(- (win - lose) / 400));
+this.newwin = win+ (this.k * (this.truevaluewin - this.hopewin));
 console.log("New score for winner:", this.newwin);
+console.log("Win",win);
 
 
     //elo algorihtm
     this.truevaluelose = 0;
-    this.hopelose = 1 / (1 + 10**(- (this.win - this.lose) / 400));
-    this.newlose = this.lose + this.k * (this.truevaluelose - this.hopelose);
-    console.log(this.newlose);
+    this.hopelose = 1 / (1 + 10**(- (win - lose) / 400));
+    this.newlose = lose + (this.k * (this.truevaluelose - this.hopelose));
+    console.log("newlose",this.newlose);
 
 
 
