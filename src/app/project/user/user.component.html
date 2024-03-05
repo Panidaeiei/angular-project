@@ -28,7 +28,7 @@
 
     <div class="vote">
         <div style="display: flex;flex-direction: column; margin-left: 200px; ">
-            <a href="/user" (click)="find(this.Catresult[0]?.id,this.Catresult[1]?.id)"  style="text-decoration: none; ">
+            <div  (click)="find(this.Catresult[0]?.id,this.Catresult[1]?.id)"  style="text-decoration: none; ">
                 <mat-card style="width: 350px; height: 520px; align-items: center;">
                     <img class="img" src="{{this.Catresult[0]?.image}}" alt="">
                     <div style="display: flex; flex-direction: row; align-items: center; margin-top: -30px;">
@@ -38,7 +38,7 @@
                     </mat-icon>
                     </div>
                 </mat-card>
-            </a>
+            </div>
         </div>
 
         <div>
@@ -49,7 +49,7 @@
 
         <div style="display: flex;flex-direction: column; ">
             
-            <a href="/user" (click)="find(this.Catresult[1]?.id,this.Catresult[0]?.id)"   style="text-decoration: none; ">
+            <div (click)="find(this.Catresult[1]?.id,this.Catresult[0]?.id)"   style="text-decoration: none; ">
                 <mat-card style="width: 350px; height: 520px; align-items: center; margin-right: 200px;">
                     <img class="img" src="{{this.Catresult[1]?.image}}" alt="">
                     <div style="display: flex; flex-direction: row; align-items: center; margin-top: -30px;">
@@ -59,14 +59,14 @@
                      </mat-icon>
                      </div>
                 </mat-card>
-            </a>
+            </div>
         </div>
     </div>
     
     <!-- ใส่สูตรคำนวนตรงนี้ -->
     <div style="display: flex; justify-content: center; margin-top: 30px;">
         <div style="display: flex; justify-content: center;  width: 70%; height: auto; background-color: aliceblue ;">
-            frgr
+           
         </div>
     </div>
 </div>

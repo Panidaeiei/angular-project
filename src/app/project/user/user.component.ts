@@ -56,8 +56,6 @@ export class UserComponent {
 
  
 
-
-
  async find(id: any, id2: any){
     const catID = id;
     const catID2 = id2;
@@ -65,12 +63,10 @@ export class UserComponent {
     const data = await lastValueFrom(this.http.get(url));
     const url2 = `http://localhost:3000/upscore/${catID2}`;
     let data2 = await lastValueFrom(this.http.get(url2));
-  console.log(data);
-  console.log(data2);
     // this.win = JSON.stringify(data);
      let  win = data as  CatModel[];
      let  lose = data2 as  CatModel[];
-     console.log(win);
+    
     // this.http.get(`http://localhost:3000/upscore/${catID}`).subscribe((result: any) => {
     //   this.win = result[0]?.score;
     //   console.log(this.win);
@@ -80,6 +76,7 @@ export class UserComponent {
     //   console.log(this.lose);
     // });
     this.calculateEloRating(id,id2,win[0].score,lose[0].score);
+    this.Catdata();
   }
 
   calculateEloRating(id: any, id2: any,win:any,lose:any) {
@@ -88,14 +85,15 @@ export class UserComponent {
 this.truevaluewin = 1;
 this.hopewin = 1 / (1 + 10**(- (win - lose) / 400));
 this.newwin = win+ (this.k * (this.truevaluewin - this.hopewin));
-console.log("New score for winner:", this.newwin);
-console.log("Win",win);
+console.log("oldWin",win);
+console.log("newWin",this.newwin);
 
 
     //elo algorihtm
     this.truevaluelose = 0;
     this.hopelose = 1 / (1 + 10**(- (win - lose) / 400));
     this.newlose = lose + (this.k * (this.truevaluelose - this.hopelose));
+    console.log("oldlose",lose);
     console.log("newlose",this.newlose);
 
 
