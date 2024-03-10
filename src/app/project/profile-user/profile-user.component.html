@@ -26,7 +26,7 @@
                     <button [routerLink]="['/editpro']" mat-raised-button style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
                         Edit profile
                     </button>
-                    <button mat-raised-button style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
+                    <button [routerLink]="['/imgrank']" mat-raised-button style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
                         Picture ranking 
                     </button>
                 </div>
@@ -46,7 +46,7 @@
         <hr style="height: 3px; background-color: rgb(255, 255, 255); border: none; margin-top: 10px;  width: 95%;">
         <div style="display: flex; flex-direction: row; justify-content: space-between;  margin-left: 170px; margin-right: 170px; margin-top: 30px">
             <div style=" display: flex; flex-direction: column; align-items: center;">
-              <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
+              <a [routerLink]="['/editimg']"><img class="img5" src="/assets/img/excat1.png" alt=""></a>
               <p class="tivote">Vote 2500 ❤️</p>  
             </div>
             <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
