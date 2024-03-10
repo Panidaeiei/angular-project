@@ -56,3 +56,13 @@
   object-fit: cover;
   
 }
+
+mat-card:hover {
+  /* Add styles here for when the card is hovered */
+  /* Example: Add a box shadow */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  /* Example: Change background color */
+  background-color: #f0f0f0;
+}
+
+
