@@ -10,7 +10,8 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { ActivatedRoute } from '@angular/router';
+import { ServiceService } from '../../service.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -31,24 +32,34 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: ServiceService
+  ) {}
 
   name: any = '';
   password: any = '';
-  resultCheck = false;
 
   check() {
-    let queryParams = `?name=${encodeURIComponent(
-      this.name
-    )}&password=${encodeURIComponent(this.password)}`;
+    let queryParams = `?name=${encodeURIComponent(this.name)}&password=${encodeURIComponent(this.password)}`;
 
-    this.http
-      .get(`http://localhost:3000${queryParams}`)
-      .subscribe((result: any) => {
-        console.log(result);
-        if (result.length > 0) {
-          this.router.navigate(['/user']);
-        }
-      });
+    this.http.get(`http://localhost:3000${queryParams}`).subscribe((result: any) => {
+      console.log(result);
+      if (result.length > 0) {
+        const user = result[0]; // Assuming the user data is the first element in the array
+        this.service.setUserData(user); // Set user data in the service
+        this.router.navigate(['/user']);
+      }
+    });
+  }
+
+  GetId() {
+    this.http.get(`http://localhost:3000/random/id`).subscribe((result: any) => {
+      console.log(result);
+      // Handle the result as needed
+    });
   }
 }
+
