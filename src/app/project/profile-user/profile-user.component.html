@@ -17,12 +17,12 @@
     <div class="head">
         <div style="display: flex; flex-direction: row; align-items: center; height: 25%;   ">
             <div style="display: flex; flex-direction: column;">
-                <img class="imgpro" src="/assets/img/excat1.png" alt="">
+                <img class="imgpro" src="{{user.avatar}}" alt="">
             </div>
             <div style="display: flex; flex-direction: column; margin-left: 20px;">
 
                 <div style="display: flex; flex-direction: row; align-items: center;">
-                    <span class="abril-fatface-regular">Panida eieija</span>
+                    <span class="abril-fatface-regular">{{user.name}}</span>
                     <button [routerLink]="['/editpro']" mat-raised-button style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
                         Edit profile
                     </button>

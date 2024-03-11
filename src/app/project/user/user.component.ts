@@ -8,7 +8,7 @@ import { RouterModule,Router,RouterLink} from '@angular/router';
 import { HttpClient,HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { CatModel } from '../../model';
-
+import { ServiceService } from '../../service.service';
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -24,7 +24,9 @@ import { CatModel } from '../../model';
 })
 export class UserComponent {
   Catresult:any=[];
-  constructor(private router: Router , private http:HttpClient) {
+  user:any=[];
+  constructor(private router: Router , private http:HttpClient,private service:ServiceService) {
+
      this.Catdata();
   }
 
@@ -35,6 +37,15 @@ export class UserComponent {
       
     });
   }
+
+  ngOnInit() {
+    this.service.userData$.subscribe((userData) => {
+      console.log('userdata',userData); // Use the userData as needed in your component
+      this.user = userData ;
+    });
+  }
+
+
   link(){
     this.router.navigate(["/user"]);
   }
