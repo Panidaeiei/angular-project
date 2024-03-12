@@ -48,6 +48,7 @@ export class ProfileUserComponent {
   
       try {
         const response = await this.http.post<any>('http://localhost:3000/upload/img', formData).toPromise();
+        
         console.log('Image upload successful:', response);
         // Handle the response from the server, if needed
       } catch (error) {

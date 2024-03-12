@@ -34,13 +34,18 @@ export class MainComponent {
   newwin: number = 0;
   newlose: number = 0;
   Catresult: any = [];
-
+  date: any ;
   // Define headers here
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
   });
 
   constructor(private router: Router, private http: HttpClient) {
+    // const date = new Date();
+    // // ปรับ timezone เป็นไทย
+    // date.setHours(date.getHours() + 7);
+    // this.date = date;
+    
     this.Catdata();
   }
 
@@ -62,14 +67,6 @@ export class MainComponent {
      let  win = data as  CatModel[];
      let  lose = data2 as  CatModel[];
     
-    // this.http.get(`http://localhost:3000/upscore/${catID}`).subscribe((result: any) => {
-    //   this.win = result[0]?.score;
-    //   console.log(this.win);
-    // });
-    // this.http.get(`http://localhost:3000/upscore/${catID2}`).subscribe((result: any) => {
-    //   this.lose = result[0]?.score;
-    //   console.log(this.lose);
-    // });
     this.calculateEloRating(id,id2,win[0].score,lose[0].score);
     this.Catdata();
   }
@@ -98,5 +95,35 @@ console.log("newWin",this.newwin);
 
     this.http.put(`http://localhost:3000/upscore/${id2}`, { score: this.newlose }, { headers: this.headers })
       .subscribe((result: any) => {});
-  }
+
+//insert to vote
+this.upwin(id,win);
+this.uplose(id2,lose);
+ }
+upwin(id:any, win :any){
+  console.log("up is working");
+    let bodyData = {
+     "cid" : id,
+     "score_old" : win,
+     "score_new" : this.newwin,
+     "date" : this.date
+    };
+  this.http.post("http://localhost:3000/upscore",bodyData).subscribe((result:any)=>{
+ console.log('vote update =',result);
+ 
+  });
+}
+uplose(id:any,lose : any){
+  console.log("uplose is working");
+    let bodyData = {
+     "cid" : id,
+     "score_old" : lose,
+     "score_new" : this.newlose,
+     "date" : this.date
+    };
+  this.http.post("http://localhost:3000/upscore",bodyData).subscribe((result:any)=>{
+ console.log('vote update =',result);
+ 
+  });
+}
 }
