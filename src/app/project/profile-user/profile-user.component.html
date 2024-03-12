@@ -53,8 +53,18 @@
             <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
         </div>
         <div style="display: flex; flex-direction: row;  margin-top: 20px;  margin-left: 170px;">
-            <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
-            <a href=""><img class="img5" style="margin-left: 150px;" src="/assets/img/buttonpus.png" alt=""></a>
+            <a href=""><img class="img5" src="{{this.selectedFile}}" alt=""></a>
+            <div>
+                <input type="file" (change)="onFileSelected($event)" accept="image/*">
+                <button (click)="uploadImage()">upload</button>
+              </div>
+
+      <!-- <img class="img5"  (click)="uploadImage()" 
+        style="margin-left: 150px;" src="/assets/img/buttonpus.png" alt=""> 
+        <input type="file" (change)="onFileSelected($event)" accept="image/*"> -->
+     
         </div>
+
     </div>
+
 </div>

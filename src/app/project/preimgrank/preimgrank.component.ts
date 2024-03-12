@@ -20,37 +20,37 @@ import Chart from 'chart.js/auto';
     RouterModule
   ],
   templateUrl: './preimgrank.component.html',
-  styleUrls: ['./preimgrank.component.scss']
+  styleUrl: './preimgrank.component.scss'
 
 })
-export class PreimgrankComponent implements OnInit {
-  constructor() {}
-  public chart: any;
-  ngOnInit(): void {
-    this.createChart();
-  }
+export class PreimgrankComponent  {
+  // constructor() {}
+  // public chart: any;
+  // ngOnInit(): void {
+  //   this.createChart();
+  // }
 
-  createChart(){
+  // createChart(){
   
-    this.chart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
+  //   this.chart = new Chart("MyChart", {
+  //     type: 'line', //this denotes tha type of chart
 
-      data: {// values on X-Axis
-        labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
-	       datasets: [
-          {
-            label: "Vote History",
-            data: ['467','576', '572', '79', '92',
-								 '574', '573', '576'],
-            backgroundColor: 'orange'
-          }
-        ]
-      },
-      options: {
-        aspectRatio:2.5
-      }
+  //     data: {// values on X-Axis
+  //       labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
+	// 							 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
+	//        datasets: [
+  //         {
+  //           label: "Vote History",
+  //           data: ['467','576', '572', '79', '92',
+	// 							 '574', '573', '576'],
+  //           backgroundColor: 'orange'
+  //         }
+  //       ]
+  //     },
+  //     options: {
+  //       aspectRatio:2.5
+  //     }
       
-    });
-  }
+  //   });
+  // }
 }

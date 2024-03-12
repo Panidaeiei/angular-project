@@ -47,7 +47,7 @@ sign_up() {
  this.http.post("http://localhost:3000/register",bodyData).subscribe((result:any)=>{
 console.log(result);
 
- })
+ });
 }
 
 validateAndSignUp() {

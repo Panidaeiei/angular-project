@@ -34,7 +34,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/chart.js/dist/Chart.min.js"
+        
             ]
           },
           "configurations": {
@@ -96,7 +96,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": [ "node_modules/chart.js/dist/Chart.min.js"]
+            "scripts": [ ]
           }
         }
       }
