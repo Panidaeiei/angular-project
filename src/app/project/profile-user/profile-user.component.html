@@ -23,11 +23,13 @@
 
                 <div style="display: flex; flex-direction: row; align-items: center;">
                     <span class="abril-fatface-regular">{{user.name}}</span>
-                    <button [routerLink]="['/editpro']" mat-raised-button style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
+                    <button [routerLink]="['/editpro']" mat-raised-button
+                        style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
                         Edit profile
                     </button>
-                    <button [routerLink]="['/imgrank']" mat-raised-button style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
-                        Picture ranking 
+                    <button [routerLink]="['/imgrank']" mat-raised-button
+                        style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
+                        Picture ranking
                     </button>
                 </div>
 
@@ -38,32 +40,28 @@
                     </mat-icon>
                 </div>
                 <!-- ใส่คำแนะนำ -->
-                <span class="text" >birthday : 28/06/2020 American Shorthair</span>
+                <span class="text">birthday : 28/06/2020 American Shorthair</span>
 
-                <span  class="text" >Add up to 5 photos.</span>
+                <span class="text">Add up to 5 photos.</span>
             </div>
         </div>
         <hr style="height: 3px; background-color: rgb(255, 255, 255); border: none; margin-top: 10px;  width: 95%;">
-        <div style="display: flex; flex-direction: row; justify-content: space-between;  margin-left: 170px; margin-right: 170px; margin-top: 30px">
+        <!-- <div
+            style="display: flex; flex-direction: row; justify-content: space-between;  margin-left: 170px; margin-right: 170px; margin-top: 30px">
             <div style=" display: flex; flex-direction: column; align-items: center;">
-              <a [routerLink]="['/editimg']"><img class="img5" src="/assets/img/excat1.png" alt=""></a>
-              <p class="tivote">Vote 2500 ❤️</p>  
+                <a [routerLink]="['/editimg']"><img class="img5" src="/assets/img/excat1.png" alt=""></a>
+                <p class="tivote">Vote 2500 ❤️</p>
             </div>
             <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
             <a href=""><img class="img5" src="/assets/img/excat1.png" alt=""></a>
-        </div>
-        <div style="display: flex; flex-direction: row;  margin-top: 20px;  margin-left: 170px;">
-            <a href=""><img class="img5" src="{{this.selectedFile}}" alt=""></a>
-            <div>
-                <input type="file" (change)="onFileSelected($event)" accept="image/*">
-                <button (click)="uploadImage()">upload</button>
-              </div>
-
-      <!-- <img class="img5"  (click)="uploadImage()" 
-        style="margin-left: 150px;" src="/assets/img/buttonpus.png" alt=""> 
-        <input type="file" (change)="onFileSelected($event)" accept="image/*"> -->
-     
-        </div>
+        </div> -->
+        <div style="display: flex; flex-direction: column; margin-top: 20px; justify-content: space-between; margin-left: 170px; margin-right: 170px;">
+            <a (click)="fileInput.click()"><img class="img5" src="{{this.selectedFile}}" alt=""></a>
+            <div style="margin-left: -30px;">
+                <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+                <button class="upimg" (click)="uploadImage()">upload</button>
+            </div>
+        </div>        
 
     </div>
 
