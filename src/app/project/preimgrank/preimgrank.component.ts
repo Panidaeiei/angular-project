@@ -1,4 +1,4 @@
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,6 +6,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { HttpClient } from '@angular/common/http';
+import { ServiceService } from '../../service.service';
 
 
 @Component({
@@ -24,33 +26,17 @@ import Chart from 'chart.js/auto';
 
 })
 export class PreimgrankComponent  {
-  // constructor() {}
-  // public chart: any;
-  // ngOnInit(): void {
-  //   this.createChart();
-  // }
-
-  // createChart(){
-  
-  //   this.chart = new Chart("MyChart", {
-  //     type: 'line', //this denotes tha type of chart
-
-  //     data: {// values on X-Axis
-  //       labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-	// 							 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
-	//        datasets: [
-  //         {
-  //           label: "Vote History",
-  //           data: ['467','576', '572', '79', '92',
-	// 							 '574', '573', '576'],
-  //           backgroundColor: 'orange'
-  //         }
-  //       ]
-  //     },
-  //     options: {
-  //       aspectRatio:2.5
-  //     }
-      
-  //   });
-  // }
+  user:any=[];
+  constructor(private router: Router , private http:HttpClient,private service:ServiceService) {}
+  ngOnInit() {
+    const cachedUserData = localStorage.getItem('userData');
+    if (cachedUserData) {
+      this.user = JSON.parse(cachedUserData);
+    } else {
+      this.service.userData$.subscribe((userData) => {
+        this.user = userData;
+        localStorage.setItem('userData', JSON.stringify(userData));
+      });
+    }
+  }
 }
