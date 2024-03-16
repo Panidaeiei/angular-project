@@ -76,14 +76,14 @@ export class MainComponent {
  // Calculate the expected win probability for the winner (always 1)
 this.truevaluewin = 1;
 this.hopewin = 1 / (1 + 10**(- (win - lose) / 400));
-this.newwin = win+ (this.k * (this.truevaluewin - this.hopewin));
+this.newwin = win+ (this.k * (this.truevaluewin + this.hopewin));
 console.log("oldWin",win);
 console.log("newWin",this.newwin);
 
 
     //elo algorihtm
     this.truevaluelose = 0;
-    this.hopelose = 1 / (1 + 10**(- (win - lose) / 400));
+    this.hopelose = 1 / (1 + 10**(- (lose - win) / 400));
     this.newlose = lose + (this.k * (this.truevaluelose - this.hopelose));
     console.log("oldlose",lose);
     console.log("newlose",this.newlose);
@@ -99,6 +99,8 @@ console.log("newWin",this.newwin);
 //insert to vote
 this.upwin(id,win);
 this.uplose(id2,lose);
+this.win=win;
+this.lose=lose;
  }
 upwin(id:any, win :any){
   console.log("up is working");
