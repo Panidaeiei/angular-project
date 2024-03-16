@@ -37,19 +37,23 @@ export class ProfileUserComponent {
       
   }
   ngOnInit() {
-    const cachedUserData = localStorage.getItem('userData');
-    if (cachedUserData) {
-      this.user = JSON.parse(cachedUserData);
-      this.getimg(this.user.id);
-      console.log(this.user.id);
-      }
-     else {
-      this.service.userData$.subscribe((userData) => {
-        this.user = userData;
-        localStorage.setItem('userData', JSON.stringify(userData));
-        this.getimg(this.user.id);
-      });
-    }
+    this.service.userData$.subscribe((userData) => {
+      console.log('userdata', userData); 
+      this.user = userData;
+    });
+    // const cachedUserData = localStorage.getItem('userData');
+    // if (cachedUserData) {
+    //   this.user = JSON.parse(cachedUserData);
+    //   this.getimg(this.user.id);
+    //   console.log(this.user.id);
+    //   }
+    //  else {
+    //   this.service.userData$.subscribe((userData) => {
+    //     this.user = userData;
+    //     localStorage.setItem('userData', JSON.stringify(userData));
+    //     this.getimg(this.user.id);
+    //   });
+    // }
   
   }
   uploadFile: File | null = null;

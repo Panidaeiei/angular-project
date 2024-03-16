@@ -37,6 +37,7 @@ export class UserComponent {
     private http: HttpClient,
     private service: ServiceService
   ) {
+    
     this.Catdata();
   }
 
