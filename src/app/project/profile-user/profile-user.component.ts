@@ -56,6 +56,7 @@ export class ProfileUserComponent {
     this.service.userData$.subscribe((userData) => {
       console.log('userdata', userData); // Use the userData as needed in your component
       this.user = userData;
+      this.getimg(this.user.id);
     });
   }
 
