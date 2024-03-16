@@ -23,17 +23,5 @@ import { ServiceService } from '../../service.service';
   styleUrl: './pagetop.component.scss'
 })
 export class PagetopComponent {
-  user:any=[];
-  constructor(private router: Router , private http:HttpClient,private service:ServiceService) {}
-  ngOnInit() {
-    const cachedUserData = localStorage.getItem('userData');
-    if (cachedUserData) {
-      this.user = JSON.parse(cachedUserData);
-    } else {
-      this.service.userData$.subscribe((userData) => {
-        this.user = userData;
-        localStorage.setItem('userData', JSON.stringify(userData));
-      });
-    }
-  }
+
 }
