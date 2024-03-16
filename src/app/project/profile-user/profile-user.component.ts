@@ -36,21 +36,12 @@ export class ProfileUserComponent {
   constructor(private router: Router , private http:HttpClient,private service:ServiceService) {
       
   }
+
   ngOnInit() {
-    const cachedUserData = localStorage.getItem('userData');
-    if (cachedUserData) {
-      this.user = JSON.parse(cachedUserData);
-      this.getimg(this.user.id);
-      console.log(this.user.id);
-      }
-     else {
-      this.service.userData$.subscribe((userData) => {
-        this.user = userData;
-        localStorage.setItem('userData', JSON.stringify(userData));
-        this.getimg(this.user.id);
-      });
-    }
-  
+    this.service.userData$.subscribe((userData) => {
+      console.log('userdata', userData); // Use the userData as needed in your component
+      this.user = userData;
+    });
   }
   uploadFile: File | null = null;
   selectedFile: File | null = null;
