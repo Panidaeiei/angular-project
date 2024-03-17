@@ -41,7 +41,7 @@ export class UserComponent {
   }
 
   Catdata() {
-    this.http.get(`https://sananja.onrender.com/random`).subscribe((result: any) => {
+    this.http.get(`https://catapirender.onrender.com/random`).subscribe((result: any) => {
       console.log(result);
       this.Catresult = result;
     });
@@ -75,9 +75,9 @@ export class UserComponent {
   async find(id: any, id2: any) {
     const catID = id;
     const catID2 = id2;
-    const url = `https://sananja.onrender.com/upscore/${catID}`;
+    const url = `https://catapirender.onrender.com/upscore/${catID}`;
     const data = await lastValueFrom(this.http.get(url));
-    const url2 = `https://sananja.onrender.com/upscore/${catID2}`;
+    const url2 = `https://catapirender.onrender.com/upscore/${catID2}`;
     let data2 = await lastValueFrom(this.http.get(url2));
     // this.win = JSON.stringify(data);
     let win = data as CatModel[];
@@ -113,7 +113,7 @@ export class UserComponent {
 
     this.http
       .put(
-        `https://sananja.onrender.com/upscore/${id}`,
+        `https://catapirender.onrender.com/upscore/${id}`,
         { score: this.newwin },
         { headers: this.headers }
       )
@@ -121,7 +121,7 @@ export class UserComponent {
 
     this.http
       .put(
-        `https://sananja.onrender.com/upscore/${id2}`,
+        `https://catapirender.onrender.com/upscore/${id2}`,
         { score: this.newlose },
         { headers: this.headers }
       )

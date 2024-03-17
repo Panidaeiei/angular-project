@@ -52,7 +52,7 @@ export class LoginComponent {
   check() {
     let queryParams = `?name=${encodeURIComponent(this.name)}&password=${encodeURIComponent(this.password)}`;
 
-    this.http.get(`https://sananja.onrender.com${queryParams}`).subscribe((result: any) => {
+    this.http.get(`https://catapirender.onrender.com${queryParams}`).subscribe((result: any) => {
       console.log(result);
       if (result.length > 0) {
         const user = result[0]; // Assuming the user data is the first element in the array
@@ -63,7 +63,7 @@ export class LoginComponent {
   }
 
   GetId() {
-    this.http.get(`https://sananja.onrender.com/random/id`).subscribe((result: any) => {
+    this.http.get(`https://catapirender.onrender.com/random/id`).subscribe((result: any) => {
       console.log(result);
       // Handle the result as needed
     });
