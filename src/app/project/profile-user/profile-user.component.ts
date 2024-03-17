@@ -79,7 +79,7 @@ export class ProfileUserComponent {
       formData.append('id', id);
       console.log('f2',id);
       try {
-        const response = await this.http.put<any>('http://localhost:3000/upload/img2', formData).toPromise();
+        const response = await this.http.put<any>('https://sananja.onrender.com/upload/img2', formData).toPromise();
         
         console.log('Image upload successful:', response);
         // Handle the response from the server, if needed
@@ -99,7 +99,7 @@ export class ProfileUserComponent {
     const userId = this.user.id; // Assuming "id" is a property in userData
     formData.append('userId', userId);
       try {
-        const response = await this.http.post<any>('http://localhost:3000/upload/img', formData).toPromise();
+        const response = await this.http.post<any>('https://sananja.onrender.com/upload/img', formData).toPromise();
         
         console.log('Image upload successful:', response);
         // Handle the response from the server, if needed
@@ -113,7 +113,7 @@ export class ProfileUserComponent {
 
   getimg(id:any) {
     let queryParams = `?id=${encodeURIComponent(id)}`;
-    this.http.get(`http://localhost:3000/img${queryParams}`).subscribe((result: any) => {
+    this.http.get(`https://sananja.onrender.com/img${queryParams}`).subscribe((result: any) => {
       console.log(result);
       this.img = result ;
     });

@@ -35,7 +35,7 @@ this.calltop();
 
 
 calltop(){
-   this.http.get('http://localhost:3000/ranktoday').subscribe((result: any) => {
+   this.http.get('https://sananja.onrender.com/ranktoday').subscribe((result: any) => {
     console.log(result);
     this.Catresult = result;
   });
