@@ -18,20 +18,20 @@
             <hr style="height: 3px; background-color: rgb(255, 255, 255); border: none; margin-top: 10px;  width: 850px; margin-bottom: 20px;">
 
             <!-- Ex.top10 -->
-            <div class="listtop">
-                <span class="abril-fatface-regular">1.</span>
-                <a ><img class="imgtop" src="/assets/img/excat1.png" alt=""></a>
-                <span class="abril-fatface-regular" style="margin-left: 30px;">Ariana</span>
-                <span class="abril-fatface-regular" style="margin-left: 45%;">160,520 ❤️</span>
+            
+            <!-- <div *ngFor="let i of Catresult" class="listtop">
+                <span class="abril-fatface-regular">{{i}}</span>
+                <a ><img class="imgtop" src="{{i.image}}" alt=""></a>
+                <span class="abril-fatface-regular" style="margin-left: 30px;"></span>
+                <span class="abril-fatface-regular" style="margin-left: 45%;">{{i.score}}❤️</span>             
+            </div> -->
+            <div *ngFor="let i of Catresult; let index = index" class="listtop">
+                <span class="abril-fatface-regular">{{index + 1}}</span> <!-- เพิ่ม + 1 เพื่อทำให้ index เริ่มต้นที่ 1 แทน 0 -->
+                <a><img class="imgtop" [src]="i.image" alt=""></a>
+                <span class="abril-fatface-regular" style="margin-left: 30px;"></span>
+                <span class="abril-fatface-regular" style="margin-left: 45%;">{{i.score}}❤️</span>             
             </div>
-
-            <div class="listtop">
-                <span class="abril-fatface-regular">2.</span>
-                <a ><img class="imgtop" src="/assets/img/excat2.png" alt=""></a>
-                <span class="abril-fatface-regular" style="margin-left: 30px;">Ariana</span>
-                <span class="abril-fatface-regular" style="margin-left: 45%;">90,258 ❤️</span>             
-            </div>
-
+            
         </div>
     </div>  
 </div>
