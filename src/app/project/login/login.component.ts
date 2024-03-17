@@ -12,6 +12,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from '../../service.service';
+import { CatModel } from '../../model';
+import { CatService } from '../../services/api/cat.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -32,11 +34,14 @@ import { ServiceService } from '../../service.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+
+  cat: CatModel[] = [];
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private service: ServiceService
+    private service: ServiceService,
+    private catService:CatService
   ) {}
 
   name: any = '';
