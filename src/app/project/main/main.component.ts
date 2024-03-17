@@ -110,7 +110,7 @@ upwin(id:any, win :any){
      "score_new" : this.newwin,
      "date" : this.date
     };
-  this.http.post("http://localhost:3000/upscore",bodyData).subscribe((result:any)=>{
+  this.http.post("https://catapirender.onrender.com/upscore",bodyData).subscribe((result:any)=>{
  console.log('vote update =',result);
  
   });
@@ -123,7 +123,7 @@ uplose(id:any,lose : any){
      "score_new" : this.newlose,
      "date" : this.date
     };
-  this.http.post("http://localhost:3000/upscore",bodyData).subscribe((result:any)=>{
+  this.http.post("https://catapirender.onrender.com/upscore",bodyData).subscribe((result:any)=>{
  console.log('vote update =',result);
  
   });
