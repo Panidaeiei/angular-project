@@ -50,7 +50,7 @@ export class MainComponent {
   }
 
   Catdata() {
-    this.http.get('http://localhost:3000/random').subscribe((result: any) => {
+    this.http.get('https://sananja.onrender.com/random').subscribe((result: any) => {
       console.log(result);
       this.Catresult = result;
     });
@@ -59,9 +59,9 @@ export class MainComponent {
  async find(id: any, id2: any){
     const catID = id;
     const catID2 = id2;
-    const url = `http://localhost:3000/upscore/${catID}`;
+    const url = `https://sananja.onrender.com/upscore/${catID}`;
     const data = await lastValueFrom(this.http.get(url));
-    const url2 = `http://localhost:3000/upscore/${catID2}`;
+    const url2 = `https://sananja.onrender.com/upscore/${catID2}`;
     let data2 = await lastValueFrom(this.http.get(url2));
     // this.win = JSON.stringify(data);
      let  win = data as  CatModel[];
@@ -90,10 +90,10 @@ console.log("newWin",this.newwin);
 
 
 
-    this.http.put(`http://localhost:3000/upscore/${id}`, { score: this.newwin }, { headers: this.headers })
+    this.http.put(`https://sananja.onrender.com/upscore/${id}`, { score: this.newwin }, { headers: this.headers })
       .subscribe((result: any) => {});
 
-    this.http.put(`http://localhost:3000/upscore/${id2}`, { score: this.newlose }, { headers: this.headers })
+    this.http.put(`https://sananja.onrender.com/upscore/${id2}`, { score: this.newlose }, { headers: this.headers })
       .subscribe((result: any) => {});
 
 //insert to vote

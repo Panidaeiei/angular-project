@@ -44,7 +44,7 @@ sign_up() {
     "password" : this.password,
     "type" : this.type
    };
- this.http.post("http://localhost:3000/register",bodyData).subscribe((result:any)=>{
+ this.http.post("https://sananja.onrender.com/register",bodyData).subscribe((result:any)=>{
 console.log(result);
 
  });
