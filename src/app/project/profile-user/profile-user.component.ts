@@ -8,10 +8,8 @@ import { RouterModule,Router,RouterLink } from '@angular/router';
 import { HttpClient} from '@angular/common/http';
 import { ServiceService } from '../../service.service';
 import { HttpClientModule } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
-import { CatModel } from '../../model';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CatService } from '../../services/api/cat.service';
 @Component({
   selector: 'app-profile-user',
   standalone: true,
@@ -33,28 +31,12 @@ export class ProfileUserComponent {
   
   img:any=[];
   user:any=[];
-  constructor(private router: Router , private http:HttpClient,private service:ServiceService) {
-      
-  }
-  // ngOnInit() {
-  //   const cachedUserData = localStorage.getItem('userData');
-  //   if (cachedUserData) {
-  //     this.user = JSON.parse(cachedUserData);
-  //     this.getimg(this.user.id);
-  //     console.log(this.user.id);
-  //     }
-  //    else {
-  //     this.service.userData$.subscribe((userData) => {
-  //       this.user = userData;
-  //       localStorage.setItem('userData', JSON.stringify(userData));
-  //       this.getimg(this.user.id);
-  //     });
-  //   }
-  
-  // }
+  constructor(private router: Router , private http:HttpClient,private service2:ServiceService,private service:CatService) {}
+ 
+
   ngOnInit() {
-    this.service.userData$.subscribe((userData) => {
-      console.log('userdata', userData); // Use the userData as needed in your component
+    this.service2.userData$.subscribe((userData) => {
+      console.log('userdata', userData); 
       this.user = userData;
       this.getimg(this.user.id);
     });
@@ -72,17 +54,15 @@ export class ProfileUserComponent {
     console.log('f1',id);
     this.changeImage(id);
   }
-  async changeImage(id : any) {
+  async changeImage(id: any) {
     if (this.uploadFile) {
       const formData = new FormData();
       formData.append('file', this.uploadFile);
       formData.append('id', id);
-      console.log('f2',id);
+      console.log('f2', id);
       try {
-        const response = await this.http.put<any>('https://catapirender.onrender.com/upload/img2', formData).toPromise();
-        
-        console.log('Image upload successful:', response);
-        // Handle the response from the server, if needed
+        await this.service.putimg(id, formData);
+        console.log('Image upload successful');
       } catch (error) {
         console.error('Error uploading image:', error);
       }
@@ -96,13 +76,12 @@ export class ProfileUserComponent {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
   
-    const userId = this.user.id; // Assuming "id" is a property in userData
-    formData.append('userId', userId);
+      const userId = this.user.id; // Assuming "id" is a property in userData
+      formData.append('userId', userId);
+  
       try {
-        const response = await this.http.post<any>('https://catapirender.onrender.com/upload/img', formData).toPromise();
-        
-        console.log('Image upload successful:', response);
-        // Handle the response from the server, if needed
+        await this.service.uploadImage(formData);
+        console.log('Image upload successful');
       } catch (error) {
         console.error('Error uploading image:', error);
       }
@@ -110,13 +89,19 @@ export class ProfileUserComponent {
       console.warn('No file selected.');
     }
   }
+  
 
-  getimg(id:any) {
-    let queryParams = `?id=${encodeURIComponent(id)}`;
-    this.http.get(`https://catapirender.onrender.com/img${queryParams}`).subscribe((result: any) => {
-      console.log(result);
-      this.img = result ;
-    });
+  async getimg(id: any) {
+    try {
+      const queryParams = `?id=${encodeURIComponent(id)}`;
+      const response = await this.service.get5img(queryParams);
+      console.log(response);
+      this.img = response;
+    } catch (error) {
+      console.error('Error getting image:', error);
+    }
   }
+  
+  
 
 }

@@ -12,7 +12,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from '../../service.service';
-import { CatModel } from '../../model';
+import { CatModel, UserModel } from '../../model';
+import { CatService } from '../../services/api/cat.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -39,33 +40,30 @@ export class LoginComponent {
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
-    private service: ServiceService
-   
+    private service: CatService,
+    private service2: ServiceService
   ) {}
 
   name: any = '';
   password: any = '';
+ user:UserModel[] =[];
+cat:CatModel[]=[];
 
-
-
-  check() {
-    let queryParams = `?name=${encodeURIComponent(this.name)}&password=${encodeURIComponent(this.password)}`;
-
-    this.http.get(`https://catapirender.onrender.com${queryParams}`).subscribe((result: any) => {
-      console.log(result);
-      if (result.length > 0) {
-        const user = result[0]; // Assuming the user data is the first element in the array
-        this.service.setUserData(user); // Set user data in the service
-        this.router.navigate(['/user']);
-      }
-    });
+ async check(name:any,password:any) {
+this.user = await this.service.checklogin(name,password);
+if (this.user) {
+  const user = this.user[0]; // Assuming the user data is the first element in the array
+  this.service2.setUserData(user); // Set user data in the service
+  this.router.navigate(['/user']);
+} 
   }
 
-  GetId() {
-    this.http.get(`https://catapirender.onrender.com/random/id`).subscribe((result: any) => {
-      console.log(result);
-      // Handle the result as needed
-    });
+async  GetId() {
+    // this.http.get(`https://catapirender.onrender.com/random/id`).subscribe((result: any) => {
+    //   console.log("aaa",result);
+    //   // Handle the result as needed
+    // });
+    this.cat = await this.service.get();
   }
 }
 

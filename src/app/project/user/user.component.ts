@@ -13,6 +13,8 @@ import {
 import { lastValueFrom } from 'rxjs';
 import { CatModel } from '../../model';
 import { ServiceService } from '../../service.service';
+import { CatService } from '../../services/api/cat.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -24,39 +26,13 @@ import { ServiceService } from '../../service.service';
     MatToolbarModule,
     RouterModule,
     HttpClientModule,
-    RouterLink,
+    RouterLink, CommonModule
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })
 export class UserComponent {
-  Catresult: any = [];
   user: any = [];
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-    private service: ServiceService
-  ) {
-    this.Catdata();
-  }
-
-  Catdata() {
-    this.http.get(`https://catapirender.onrender.com/random`).subscribe((result: any) => {
-      console.log(result);
-      this.Catresult = result;
-    });
-  }
-
-  ngOnInit() {
-    this.service.userData$.subscribe((userData) => {
-      console.log('userdata', userData); // Use the userData as needed in your component
-      this.user = userData;
-    });
-  }
-
-  link() {
-    this.router.navigate(['/user']);
-  }
   k: any = 32;
   win: number = 0;
   lose: number = 0;
@@ -66,6 +42,32 @@ export class UserComponent {
   hopelose: number = 0;
   newwin: number = 0;
   newlose: number = 0;
+  Catresult: CatModel[] = [];
+  date: any ;
+
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private service2: ServiceService,
+    private service:CatService
+    
+  ) { this.Catdata(); }
+
+ async Catdata() {
+    this.Catresult = await this.service.get();
+  }
+
+  ngOnInit() {
+    this.service2.userData$.subscribe((userData) => {
+      console.log('userdata', userData); // Use the userData as needed in your component
+      this.user = userData;
+    });
+  }
+
+  link() {
+    this.router.navigate(['/user']);
+  }
+
 
   // Define headers here
   headers = new HttpHeaders({
@@ -75,59 +77,86 @@ export class UserComponent {
   async find(id: any, id2: any) {
     const catID = id;
     const catID2 = id2;
-    const url = `https://catapirender.onrender.com/upscore/${catID}`;
-    const data = await lastValueFrom(this.http.get(url));
-    const url2 = `https://catapirender.onrender.com/upscore/${catID2}`;
-    let data2 = await lastValueFrom(this.http.get(url2));
-    // this.win = JSON.stringify(data);
-    let win = data as CatModel[];
-    let lose = data2 as CatModel[];
+console.log('id',id);
+    try {
+        const data = await this.service.SelectScore(catID);
+        const data2 = await this.service.SelectScore(catID2);
+        console.log('data',data);
+        if (!data || !data2) {
+            console.error('Failed to fetch scores for cats.');
+            return; // Exit function if scores are not fetched successfully
+        }
 
-    // this.http.get(`http://localhost:3000/upscore/${catID}`).subscribe((result: any) => {
-    //   this.win = result[0]?.score;
-    //   console.log(this.win);
-    // });
-    // this.http.get(`http://localhost:3000/upscore/${catID2}`).subscribe((result: any) => {
-    //   this.lose = result[0]?.score;
-    //   console.log(this.lose);
-    // });
-    this.calculateEloRating(id, id2, win[0].score, lose[0].score);
+        const scoreWin = data[0].score;
+        const scoreLose = data2[0].score;
+
+        this.calculateEloRating(id, id2, scoreWin, scoreLose);
+    } catch (error) {
+        console.error('Error fetching/updating scores:', error);
+        // Handle error gracefully
+    }
+
     this.Catdata();
-  }
+}
 
-  calculateEloRating(id: any, id2: any, win: any, lose: any) {
+ async calculateEloRating(id: any, id2: any,win:any,lose:any) {
     //elo algorihtm
-    // Calculate the expected win probability for the winner (always 1)
-    this.truevaluewin = 1;
-    this.hopewin = 1 / (1 + 10 ** (-(win - lose) / 400));
-    this.newwin = win + this.k * (this.truevaluewin - this.hopewin);
-    console.log('oldWin', win);
-    console.log('newWin', this.newwin);
+ // Calculate the expected win probability for the winner (always 1)
+this.truevaluewin = 1;
+this.hopewin = 1 / (1 + 10**(- (win - lose) / 400));
+this.newwin = win+ (this.k * (this.truevaluewin + this.hopewin));
+console.log("oldWin",win);
+console.log("newWin",this.newwin);
+
 
     //elo algorihtm
     this.truevaluelose = 0;
-    this.hopelose = 1 / (1 + 10 ** (-(win - lose) / 400));
-    this.newlose = lose + this.k * (this.truevaluelose - this.hopelose);
-    console.log('oldlose', lose);
-    console.log('newlose', this.newlose);
+    this.hopelose = 1 / (1 + 10**(- (lose - win) / 400));
+    this.newlose = lose + (this.k * (this.truevaluelose - this.hopelose));
+    console.log("oldlose",lose);
+    console.log("newlose",this.newlose);
 
-    this.http
-      .put(
-        `https://catapirender.onrender.com/upscore/${id}`,
-        { score: this.newwin },
-        { headers: this.headers }
-      )
-      .subscribe((result: any) => {});
 
-    this.http
-      .put(
-        `https://catapirender.onrender.com/upscore/${id2}`,
-        { score: this.newlose },
-        { headers: this.headers }
-      )
-      .subscribe((result: any) => {});
+   await this.service.put(id, this.newwin);
+   await this.service.put(id2, this.newlose);
 
-    this.win = win;
-    this.lose = lose;
+this.upwin(id,win);
+this.uplose(id2,lose);
+this.win=win;
+this.lose=lose;
+ }
+
+async upwin(id: any, win: any) {
+  console.log("up is working");
+  const bodyData = {
+    cid: id,
+    score_old: win,
+    score_new: this.newwin,
+    date: this.date
+  };
+
+  try {
+    await this.service.updateScore(bodyData);
+    console.log('Vote updated successfully');
+  } catch (error) {
+    console.error('Error updating vote:', error);
+    // Handle error gracefully
   }
+}
+async uplose(id:any,lose : any){
+  console.log("uplose is working");
+    let bodyData = {
+     "cid" : id,
+     "score_old" : lose,
+     "score_new" : this.newlose,
+     "date" : this.date
+    };
+    try {
+      await this.service.updateScore(bodyData);
+      console.log('Vote updated successfully');
+    } catch (error) {
+      console.error('Error updating vote:', error);
+      // Handle error gracefully
+    }
+}
 }

@@ -11,6 +11,7 @@ import { ServiceService } from '../../service.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CatService } from '../../services/api/cat.service';
 @Component({
   selector: 'app-pagetop',
   standalone: true,
@@ -29,16 +30,14 @@ export class PagetopComponent {
   Catresult: any;
 
   
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router,private service: CatService,private  http: HttpClient) {
 this.calltop();
   }
 
 
-calltop(){
-   this.http.get('https://catapirender.onrender.com/ranktoday').subscribe((result: any) => {
-    console.log(result);
-    this.Catresult = result;
-  });
+async calltop(){
+ this.Catresult = await this.service.RankToday();
+ return this.Catresult;
 }
 }
  

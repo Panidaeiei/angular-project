@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { RouterModule} from '@angular/router';
+import { CatService } from '../../services/api/cat.service';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -26,7 +27,7 @@ import { RouterModule} from '@angular/router';
 })
 export class SignupComponent {
 
-  constructor(private http:HttpClient,private router: Router){}
+  constructor(private http:HttpClient,private router: Router,private service:CatService){}
 
   name:any="";
   email:any="";
@@ -37,17 +38,17 @@ export class SignupComponent {
   
   
   
-sign_up() {
+ async sign_up() {
    let bodyData = {
     "name" : this.name,
     "email" : this.email,
     "password" : this.password,
     "type" : this.type
    };
- this.http.post("https://catapirender.onrender.com/register",bodyData).subscribe((result:any)=>{
+ const result = await this.service.signUp(bodyData);
 console.log(result);
 
- });
+
 }
 
 validateAndSignUp() {
