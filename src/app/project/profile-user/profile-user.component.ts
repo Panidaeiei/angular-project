@@ -45,11 +45,14 @@ export class ProfileUserComponent implements OnInit{
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
+    this.uploadImage(this.user[0].id);
   }
   onFileUpdate(event: any, id: any): void {
     this.uploadFile = event.target.files[0];
     console.log('f1',id);
     this.changeImage(id);
+    this.service.clearUserFromLocalStorage();
+    this.service.setUserInLocalStorage(this.user);
   }
   async changeImage(id: any) {
     if (this.uploadFile) {
@@ -58,7 +61,7 @@ export class ProfileUserComponent implements OnInit{
       formData.append('id', id);
       console.log('f2', id);
       try {
-        await this.service.putimg(id, formData);
+      await this.service.putimg(id, formData);
         console.log('Image upload successful');
       } catch (error) {
         console.error('Error uploading image:', error);
@@ -68,16 +71,32 @@ export class ProfileUserComponent implements OnInit{
     }
   }
 
-  async uploadImage() {
+  // async uploadImage() {
+  //   if (this.selectedFile) {
+  //     const formData = new FormData();
+  //     formData.append('file', this.selectedFile);
+  //     const userId = this.user.id; // Assuming "id" is a property in userData
+  //     formData.append('userId', userId);
+  
+  //     try {
+  //       await this.service.uploadImage(formData);
+  //       console.log('Image upload successful');
+  //     } catch (error) {
+  //       console.error('Error uploading image:', error);
+  //     }
+  //   } else {
+  //     console.warn('No file selected.');
+  //   }
+  // }
+  async uploadImage(id:any) {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
-  
-      const userId = this.user.id; // Assuming "id" is a property in userData
-      formData.append('userId', userId);
-  
+      // const userId = this.user.id; // Assuming "id" is a property in userData
+      formData.append('userId', id);
+      console.log(id);
       try {
-        await this.service.uploadImage(formData);
+        await this.service.uploadImage(formData); // ส่งข้อมูลผู้ใช้ผ่าน FormData
         console.log('Image upload successful');
       } catch (error) {
         console.error('Error uploading image:', error);
@@ -86,7 +105,6 @@ export class ProfileUserComponent implements OnInit{
       console.warn('No file selected.');
     }
   }
-  
 
   async getimg(id: any) {
       const queryParams = `?id=${encodeURIComponent(id)}`;
