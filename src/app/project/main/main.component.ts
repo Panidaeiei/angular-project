@@ -10,6 +10,7 @@ import { lastValueFrom } from 'rxjs';
 import { CatModel } from '../../model';
 import { CatService } from '../../services/api/cat.service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -104,6 +105,34 @@ this.upwin(id,win);
 this.uplose(id2,lose);
 this.win=win;
 this.lose=lose;
+Swal.fire({
+  html: `<div style="display: flex; justify-content: center; margin-top: 40px; margin-bottom: 40px;">
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;  width: 70%; height: auto; background-color: rgb(255, 255, 255);">
+     <span style="font-size: 25px;  margin-bottom: 20px;">สูตรการคำนวณ Elo Rating</span>
+     <div style="display: flex; flex-direction: row; margin-bottom: 20px;">
+          <span style="color: rgb(37, 157, 26);">Score Win : ${win}</span>
+          <span style="margin-left: 30px; color: brown;">Score Lose : ${lose}</span>
+     </div>
+     <span style="font-size: 18px; margin-bottom: 20px;">หาค่า จากคะแนนที่ได้มาข้างต้น คนชนะ=a คนแพ้=b</span>
+     <span style="font-size: 18px; color: rgb(37, 157, 26);">ผู้ชนะ</span>
+     <span style="font-size: 18px; color: rgb(37, 157, 26);">Ea = 1 / 1 + 10 ^ (${win} - ${lose}) / 400 = ${this.hopewin}</span>
+     <span style="font-size: 18px; margin-top: 20px; color: brown;">ผู้แพ้</span>
+     <span style="font-size: 18px; color: brown;">Eb = 1 / 1 + 10 ^ (${lose} - ${win}) / 400 = ${this.hopelose}</span>
+
+     <span style="font-size: 18px; margin-top: 20px;">หลังคำนวณคะแนนใหม่จะได้คะแนนใหม่ของผู้ชนะ และผู้แพ้ดังนี้</span>
+
+          <div style="display: flex; flex-direction: column; align-items: center;">
+              <span style="font-size: 18px; margin-top: 20px; color: rgb(37, 157, 26);">ผู้ชนะ</span>
+              <span style="font-size: 18px; color: rgb(37, 157, 26);">Ra = ${win} + 32 (1 + ${this.hopewin}) = ${this.newwin}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+              <span style="font-size: 18px; margin-top: 20px; color: brown;">ผู้แพ้</span>
+              <span style="font-size: 18px; color: brown; margin-bottom: 20px;">Rb = ${lose} + 32 (0 - ${this.hopelose}) = ${this.newlose}</span>
+          </div>
+  </div>
+</div>`,
+width: '1000px'
+});
  }
 
 async upwin(id: any, win: any) {
