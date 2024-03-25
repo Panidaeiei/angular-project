@@ -14,7 +14,8 @@
     <img class="imgbcat" src="/assets/img/editcatei.png" alt="">
     <div style="display: flex; flex-direction: row; justify-content: center;">
         <mat-card class="card">
-            <a href=""><img class="imgpro" src="{{user.image}}" alt=""></a>
+            <a (click)="fileInput.click()"><img class="imgpro" src="{{user[0]?.avatar}}" alt=""></a>
+            <input #fileInput type="file" (change)="onFileUpdate($event, user[0]?.id)" accept="image/*" style="display: none;">
 
             <span style="margin-right: 55%; margin-top: 30px;">
                 Username

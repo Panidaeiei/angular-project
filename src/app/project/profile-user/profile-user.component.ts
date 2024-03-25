@@ -4,15 +4,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule,Router,RouterLink } from '@angular/router';
-import { HttpClient} from '@angular/common/http';
+import { RouterModule, Router, RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CatService } from '../../services/api/cat.service';
 @Component({
   selector: 'app-profile-user',
   standalone: true,
-  imports: [RouterOutlet,
+  imports: [
+    RouterOutlet,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -21,35 +22,37 @@ import { CatService } from '../../services/api/cat.service';
     HttpClientModule,
     RouterLink,
     CommonModule,
-    
-   ],
+  ],
   templateUrl: './profile-user.component.html',
-  styleUrls: ['./profile-user.component.scss']
+  styleUrls: ['./profile-user.component.scss'],
 })
-export class ProfileUserComponent implements OnInit{
-  
-  img:any=[];
-  user:any;
-  constructor(private router: Router , private http:HttpClient,private service:CatService) 
-  { }
- 
+export class ProfileUserComponent implements OnInit {
+  img: any = [];
+  user: any;
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private service: CatService
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.user = this.service.getUserFromLocalStorage(); // ดึงข้อมูลผู้ใช้จาก Local Storage
     await this.getimg(this.user[0].id); // เรียกใช้งาน getimg และส่งค่า ID จากข้อมูลผู้ใช้
   }
 
-
   uploadFile: File | null = null;
   selectedFile: File | null = null;
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
+    this.uploadImage(this.user[0].id);
   }
   onFileUpdate(event: any, id: any): void {
     this.uploadFile = event.target.files[0];
-    console.log('f1',id);
+    console.log('f1', id);
     this.changeImage(id);
+    this.service.clearUserFromLocalStorage();
+    this.service.setUserInLocalStorage(this.user);
   }
   async changeImage(id: any) {
     if (this.uploadFile) {
@@ -68,14 +71,13 @@ export class ProfileUserComponent implements OnInit{
     }
   }
 
-  async uploadImage() {
+  async uploadImage(id: any) {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
-  
-      const userId = this.user.id; // Assuming "id" is a property in userData
-      formData.append('userId', userId);
-  
+      formData.append('userId',id);
+      console.log(id);
+
       try {
         await this.service.uploadImage(formData);
         console.log('Image upload successful');
@@ -86,16 +88,12 @@ export class ProfileUserComponent implements OnInit{
       console.warn('No file selected.');
     }
   }
-  
 
   async getimg(id: any) {
-      const queryParams = `?id=${encodeURIComponent(id)}`;
-      const response = await this.service.get5img(queryParams);
-      console.log(response);
-      this.img = response;
-      return this.img;
-    } 
-  
-  
-  
+    const queryParams = `?id=${encodeURIComponent(id)}`;
+    const response = await this.service.get5img(queryParams);
+    console.log(response);
+    this.img = response;
+    return this.img;
+  }
 }

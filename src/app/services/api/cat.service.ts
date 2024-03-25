@@ -98,4 +98,13 @@ export class CatService {
     const response = await lastValueFrom(this.http.post(url, data, { headers: this.headers }));
     return response;
   }
+
+  public async putimgUser(id: number, formData: FormData): Promise<void> {
+    try {
+      await this.http.put<any>(`${this.constants.API_ENDPOINT}/upload/imgUser`, formData).toPromise();
+
+    } catch (error) {
+      throw new Error('Failed to upload image: ');
+    }
+  }
 }

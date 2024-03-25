@@ -58,12 +58,12 @@
         <div
             style="display: flex; flex-direction: column; margin-top: 20px; justify-content: center; align-items: center; ">
             <div style="display: flex; flex-wrap: wrap;">
-                <a (click)="fileInput.click()"><img class="img5" src="{{this.selectedFile}}" alt=""></a>
-            </div>
-            <div style=" margin-left:  -70px;">
+                <a (click)="fileInput.click()"><img class="imgpro" src="{{user[0]?.avatar}}" alt=""></a>
                 <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
-                <button class="upimg" (click)="uploadImage()">upload</button>
-            </div>
+            </div>	          
+                    <!-- <div style=" margin-left:  -70px;">
+                <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;">	                <!-- <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;"> -->
+                          <!-- <button class="upimg" (click)="uploadImage()">upload</button> -->
         </div>
 
     </div>
