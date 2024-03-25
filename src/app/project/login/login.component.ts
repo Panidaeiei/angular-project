@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ServiceService } from '../../service.service';
+
 import { CatModel, UserModel } from '../../model';
 import { CatService } from '../../services/api/cat.service';
 @Component({
@@ -33,7 +33,7 @@ import { CatService } from '../../services/api/cat.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
 
   constructor(
@@ -41,7 +41,7 @@ export class LoginComponent {
     private router: Router,
     private route: ActivatedRoute,
     private service: CatService,
-    private service2: ServiceService
+  
   ) {}
 
   name: any = '';
@@ -49,20 +49,20 @@ export class LoginComponent {
  user:UserModel[] =[];
 cat:CatModel[]=[];
 
- async check(name:any,password:any) {
-this.user = await this.service.checklogin(name,password);
-if (this.user) {
-  const user = this.user[0]; // Assuming the user data is the first element in the array
-  this.service2.setUserData(user); // Set user data in the service
-  this.router.navigate(['/user']);
-} 
+ngOnInit(): void {
+}
+
+async check(name: any, password: any) {
+  const user = await this.service.checklogin(name, password);
+  if (user) {
+    this.service.setUserInLocalStorage(user); // เก็บข้อมูลผู้ใช้ใน Local Storage
+    this.router.navigate(['/user']);
+  } else {
+    // Handle invalid login
   }
+}
 
 async  GetId() {
-    // this.http.get(`https://catapirender.onrender.com/random/id`).subscribe((result: any) => {
-    //   console.log("aaa",result);
-    //   // Handle the result as needed
-    // });
     this.cat = await this.service.get();
   }
 }

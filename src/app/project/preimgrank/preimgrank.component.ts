@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { HttpClient } from '@angular/common/http';
-import { ServiceService } from '../../service.service';
 
 
 @Component({
@@ -26,17 +25,5 @@ import { ServiceService } from '../../service.service';
 
 })
 export class PreimgrankComponent  {
-  user:any=[];
-  constructor(private router: Router , private http:HttpClient,private service:ServiceService) {}
-  ngOnInit() {
-    const cachedUserData = localStorage.getItem('userData');
-    if (cachedUserData) {
-      this.user = JSON.parse(cachedUserData);
-    } else {
-      this.service.userData$.subscribe((userData) => {
-        this.user = userData;
-        localStorage.setItem('userData', JSON.stringify(userData));
-      });
-    }
-  }
+
 }

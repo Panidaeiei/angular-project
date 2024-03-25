@@ -12,7 +12,23 @@ export class CatService {
     'Content-Type',
     'application/json'
   );
+
+
   constructor(private constants: Constants, private http: HttpClient) {}
+
+  setUserInLocalStorage(user: any) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  getUserFromLocalStorage(): any {
+    const userString = localStorage.getItem('user');
+    return userString ? JSON.parse(userString) : null;
+  }
+
+  clearUserFromLocalStorage() {
+    localStorage.removeItem('user');
+  }
+
 
   public async checklogin(name: string, password: string) {
     const url = `${this.constants.API_ENDPOINT}/?name=${encodeURIComponent(
@@ -50,7 +66,7 @@ export class CatService {
   }
 
   public async RankToday() {
-    const url = this.constants.API_ENDPOINT + '/ranktoday';
+    const url = this.constants.API_ENDPOINT + '/rankold';
     const response = await lastValueFrom(this.http.get(url));
     return response as CatModel[];
   }
