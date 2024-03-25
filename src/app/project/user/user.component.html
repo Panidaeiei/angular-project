@@ -11,7 +11,7 @@
         style="background-color: transparent; color: aliceblue; border: none; ">
         <span style="font-size: 17px;">Profile</span>
     </button>
-    <a [routerLink]="['/profileuser']"><img class="pro" src="{{user?.avatar}}" alt=""></a>
+    <a [routerLink]="['/profileuser']"><img class="pro" src="{{user[0]?.avatar}}" alt=""></a>
 </mat-toolbar>
 
 <div style="display: flex; flex-direction: column;">

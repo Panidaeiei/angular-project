@@ -7,7 +7,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule} from '@angular/router';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
-import { ServiceService } from '../../service.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -37,6 +36,7 @@ this.calltop();
 
 async calltop(){
  this.Catresult = await this.service.RankToday();
+ console.log(this.Catresult);
  return this.Catresult;
 }
 }

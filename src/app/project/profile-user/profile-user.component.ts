@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,7 +6,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule,Router,RouterLink } from '@angular/router';
 import { HttpClient} from '@angular/common/http';
-import { ServiceService } from '../../service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CatService } from '../../services/api/cat.service';
@@ -27,19 +26,17 @@ import { CatService } from '../../services/api/cat.service';
   templateUrl: './profile-user.component.html',
   styleUrls: ['./profile-user.component.scss']
 })
-export class ProfileUserComponent {
+export class ProfileUserComponent implements OnInit{
   
   img:any=[];
-  user:any=[];
-  constructor(private router: Router , private http:HttpClient,private service2:ServiceService,private service:CatService) {}
+  user:any;
+  constructor(private router: Router , private http:HttpClient,private service:CatService) 
+  { }
  
 
-  ngOnInit() {
-    this.service2.userData$.subscribe((userData) => {
-      console.log('userdata', userData); 
-      this.user = userData;
-      this.getimg(this.user.id);
-    });
+  async ngOnInit(): Promise<void> {
+    this.user = this.service.getUserFromLocalStorage(); // ดึงข้อมูลผู้ใช้จาก Local Storage
+    await this.getimg(this.user[0].id); // เรียกใช้งาน getimg และส่งค่า ID จากข้อมูลผู้ใช้
   }
 
 
@@ -92,16 +89,13 @@ export class ProfileUserComponent {
   
 
   async getimg(id: any) {
-    try {
       const queryParams = `?id=${encodeURIComponent(id)}`;
       const response = await this.service.get5img(queryParams);
       console.log(response);
       this.img = response;
-    } catch (error) {
-      console.error('Error getting image:', error);
-    }
-  }
+      return this.img;
+    } 
   
   
-
+  
 }

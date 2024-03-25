@@ -26,7 +26,9 @@
                 <span class="abril-fatface-regular" style="margin-left: 45%;">{{i.score}}❤️</span>             
             </div> -->
             <div *ngFor="let i of Catresult; let index = index" class="listtop">
-                <span class="abril-fatface-regular">{{index + 1}}</span> <!-- เพิ่ม + 1 เพื่อทำให้ index เริ่มต้นที่ 1 แทน 0 -->
+                <span class="abril-fatface-regular">{{i.current_rank}}</span>
+                <span>{{i.ranking}}</span>
+                 <!-- เพิ่ม + 1 เพื่อทำให้ index เริ่มต้นที่ 1 แทน 0 -->
                 <a><img class="imgtop" [src]="i.image" alt=""></a>
                 <span class="abril-fatface-regular" style="margin-left: 30px;"></span>
                 <span class="abril-fatface-regular" style="margin-left: 45%;">{{i.score}}❤️</span>             

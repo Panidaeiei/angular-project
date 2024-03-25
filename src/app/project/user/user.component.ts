@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +12,6 @@ import {
 } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { CatModel } from '../../model';
-import { ServiceService } from '../../service.service';
 import { CatService } from '../../services/api/cat.service';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -31,8 +30,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })
-export class UserComponent {
-  user: any = [];
+export class UserComponent implements OnInit{
+  user: any;
   k: any = 32;
   win: number = 0;
   lose: number = 0;
@@ -48,7 +47,6 @@ export class UserComponent {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private service2: ServiceService,
     private service:CatService
     
   ) { this.Catdata(); }
@@ -57,16 +55,14 @@ export class UserComponent {
     this.Catresult = await this.service.get();
   }
 
-  ngOnInit() {
-    this.service2.userData$.subscribe((userData) => {
-      console.log('userdata', userData); // Use the userData as needed in your component
-      this.user = userData;
-    });
+  ngOnInit(): void {
+    this.user = this.service.getUserFromLocalStorage(); // ดึงข้อมูลผู้ใช้จาก Local Storage
+    return this.user;
   }
 
-  link() {
-    this.router.navigate(['/user']);
-  }
+  // link() {
+  //   this.router.navigate(['/user']);
+  // }
 
 
   // Define headers here

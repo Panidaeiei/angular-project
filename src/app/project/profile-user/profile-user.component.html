@@ -17,12 +17,12 @@
     <div class="head">
         <div style="display: flex; flex-direction: row; align-items: center; height: 25%;   ">
             <div style="display: flex; flex-direction: column;">
-                <img class="imgpro" src="{{user.avatar}}" alt="">
+                <img class="imgpro" src="{{user[0]?.avatar}}" alt="">
             </div>
             <div style="display: flex; flex-direction: column; margin-left: 20px;">
 
                 <div style="display: flex; flex-direction: row; align-items: center;">
-                    <span class="abril-fatface-regular">{{user.name}}</span>
+                    <span class="abril-fatface-regular">{{user[0].name}}</span>
                     <button [routerLink]="['/editpro']" mat-raised-button
                         style="border-radius: 20px; margin-top: 20px; margin-left: 20px;">
                         Edit profile
@@ -33,14 +33,14 @@
                     </button>
                 </div>
 
-                <div style="display: flex; flex-direction: row; align-items: center;">
+                <!-- <div style="display: flex; flex-direction: row; align-items: center;">
                     <span class="abril-fatface-regular2">Vote : 26k</span>
                     <mat-icon class="material-symbols-outlined2" style="margin-left: 5px;">
                         favorite
                     </mat-icon>
-                </div>
+                </div> -->
                 <!-- ใส่คำแนะนำ -->
-                <span class="text">birthday : 28/06/2020 American Shorthair</span>
+                <!-- <span class="text">birthday : 28/06/2020 American Shorthair</span> -->
 
                 <span class="text">Add up to 5 photos.</span>
             </div>
