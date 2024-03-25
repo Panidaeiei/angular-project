@@ -26,7 +26,8 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule,
     RouterModule,
     HttpClientModule,
-    RouterLink, CommonModule
+    RouterLink,
+    CommonModule,
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
@@ -43,17 +44,18 @@ export class UserComponent {
   newwin: number = 0;
   newlose: number = 0;
   Catresult: CatModel[] = [];
-  date: any ;
+  date: any;
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private service2: ServiceService,
-    private service:CatService
-    
-  ) { this.Catdata(); }
+    private service: CatService
+  ) {
+    this.Catdata();
+  }
 
- async Catdata() {
+  async Catdata() {
     this.Catresult = await this.service.get();
   }
 
@@ -68,7 +70,6 @@ export class UserComponent {
     this.router.navigate(['/user']);
   }
 
-
   // Define headers here
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -77,79 +78,77 @@ export class UserComponent {
   async find(id: any, id2: any) {
     const catID = id;
     const catID2 = id2;
-console.log('id',id);
+    console.log('id', id);
     try {
-        const data = await this.service.SelectScore(catID);
-        const data2 = await this.service.SelectScore(catID2);
-        console.log('data',data);
-        if (!data || !data2) {
-            console.error('Failed to fetch scores for cats.');
-            return; // Exit function if scores are not fetched successfully
-        }
+      const data = await this.service.SelectScore(catID);
+      const data2 = await this.service.SelectScore(catID2);
+      console.log('data', data);
+      if (!data || !data2) {
+        console.error('Failed to fetch scores for cats.');
+        return; // Exit function if scores are not fetched successfully
+      }
 
-        const scoreWin = data[0].score;
-        const scoreLose = data2[0].score;
+      const scoreWin = data[0].score;
+      const scoreLose = data2[0].score;
 
-        this.calculateEloRating(id, id2, scoreWin, scoreLose);
+      this.calculateEloRating(id, id2, scoreWin, scoreLose);
     } catch (error) {
-        console.error('Error fetching/updating scores:', error);
-        // Handle error gracefully
+      console.error('Error fetching/updating scores:', error);
+      // Handle error gracefully
     }
 
     this.Catdata();
-}
+  }
 
- async calculateEloRating(id: any, id2: any,win:any,lose:any) {
+  async calculateEloRating(id: any, id2: any, win: any, lose: any) {
     //elo algorihtm
- // Calculate the expected win probability for the winner (always 1)
-this.truevaluewin = 1;
-this.hopewin = 1 / (1 + 10**(- (win - lose) / 400));
-this.newwin = win+ (this.k * (this.truevaluewin + this.hopewin));
-console.log("oldWin",win);
-console.log("newWin",this.newwin);
-
+    // Calculate the expected win probability for the winner (always 1)
+    this.truevaluewin = 1;
+    this.hopewin = 1 / (1 + 10 ** (-(win - lose) / 400));
+    this.newwin = win + this.k * (this.truevaluewin + this.hopewin);
+    console.log('oldWin', win);
+    console.log('newWin', this.newwin);
 
     //elo algorihtm
     this.truevaluelose = 0;
-    this.hopelose = 1 / (1 + 10**(- (lose - win) / 400));
-    this.newlose = lose + (this.k * (this.truevaluelose - this.hopelose));
-    console.log("oldlose",lose);
-    console.log("newlose",this.newlose);
+    this.hopelose = 1 / (1 + 10 ** (-(lose - win) / 400));
+    this.newlose = lose + this.k * (this.truevaluelose - this.hopelose);
+    console.log('oldlose', lose);
+    console.log('newlose', this.newlose);
 
+    await this.service.put(id, this.newwin);
+    await this.service.put(id2, this.newlose);
 
-   await this.service.put(id, this.newwin);
-   await this.service.put(id2, this.newlose);
-
-this.upwin(id,win);
-this.uplose(id2,lose);
-this.win=win;
-this.lose=lose;
- }
-
-async upwin(id: any, win: any) {
-  console.log("up is working");
-  const bodyData = {
-    cid: id,
-    score_old: win,
-    score_new: this.newwin,
-    date: this.date
-  };
-
-  try {
-    await this.service.updateScore(bodyData);
-    console.log('Vote updated successfully');
-  } catch (error) {
-    console.error('Error updating vote:', error);
-    // Handle error gracefully
+    this.upwin(id, win);
+    this.uplose(id2, lose);
+    this.win = win;
+    this.lose = lose;
   }
-}
-async uplose(id:any,lose : any){
-  console.log("uplose is working");
+
+  async upwin(id: any, win: any) {
+    console.log('up is working');
+    const bodyData = {
+      cid: id,
+      score_old: win,
+      score_new: this.newwin,
+      date: this.date,
+    };
+
+    try {
+      await this.service.updateScore(bodyData);
+      console.log('Vote updated successfully');
+    } catch (error) {
+      console.error('Error updating vote:', error);
+      // Handle error gracefully
+    }
+  }
+  async uplose(id: any, lose: any) {
+    console.log('uplose is working');
     let bodyData = {
-     "cid" : id,
-     "score_old" : lose,
-     "score_new" : this.newlose,
-     "date" : this.date
+      cid: id,
+      score_old: lose,
+      score_new: this.newlose,
+      date: this.date,
     };
     try {
       await this.service.updateScore(bodyData);
@@ -158,5 +157,5 @@ async uplose(id:any,lose : any){
       console.error('Error updating vote:', error);
       // Handle error gracefully
     }
-}
+  }
 }
