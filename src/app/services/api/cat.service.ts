@@ -92,6 +92,12 @@ export class CatService {
     const response = await lastValueFrom(this.http.get(url));
     return response as CatModel[];
   }
+
+  public async get1cat(id: any) {
+    const url =`${this.constants.API_ENDPOINT}/1cat/${id}`;
+    const response = await lastValueFrom(this.http.get(url));
+    return response as CatModel[];
+  }
   
   public async signUp(data: any): Promise<any> {
     const url = this.constants.API_ENDPOINT + '/register';
@@ -102,6 +108,15 @@ export class CatService {
   public async putimgUser(id: number, formData: FormData): Promise<void> {
     try {
       await this.http.put<any>(`${this.constants.API_ENDPOINT}/upload/imgUser`, formData).toPromise();
+
+    } catch (error) {
+      throw new Error('Failed to upload image: ');
+    }
+  }
+ 
+  public async  putDataUser(id: number, formData: FormData): Promise<void> {
+    try {
+      await this.http.put<any>(`${this.constants.API_ENDPOINT}/upload/imgUserData`, formData).toPromise();
 
     } catch (error) {
       throw new Error('Failed to upload image: ');
