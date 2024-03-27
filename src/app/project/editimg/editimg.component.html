@@ -10,32 +10,29 @@
     </button>
 </mat-toolbar>
 
-<div class="container">
-    <img class="imgbcat" src="/assets/img/editcatei.png" alt="">
-    <div style="display: flex; flex-direction: row; justify-content: center;">
-        <mat-card class="card">
-            <a (click)="fileInput.click()"><img class="imgpro" src="{{user[0]?.avatar}}" alt=""></a>
-            <input #fileInput type="file" (change)="onFileUpdate($event, user[0]?.id)" accept="image/*" style="display: none;">
-
-            <span style="margin-right: 55%; margin-top: 30px;">
-                Username
-            </span>
-            <input class="input" matInput placeholder="">
-
-            <span style="margin-right: 41%; margin-top: 30px;">
-                Original password
-            </span>
-            <input class="input" matInput placeholder="">
-
-            <span style="margin-right: 46%; margin-top: 30px;">
-                New password
-            </span>
-            <input class="input" matInput placeholder="">
-
-            <button [routerLink]="['/profileuser']" class="button" style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
-                Confirm edits
-            </button>
-
-        </mat-card>
+<div>
+    <div class="container">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="display: flex; flex-direction: row;">
+                <span class="abril-fatface-regular">Edit/Delete</span>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; margin-top: 50px;">
+            <div class="edit">
+                <img class="img" src="/assets/img/excat1.png" alt="">
+                <div style="display: flex; flex-direction: row;">
+                    <button class="button">
+                        <span>
+                            Edit
+                        </span>
+                    </button>
+                    <button class="button2">
+                        <span>
+                            Delete
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
