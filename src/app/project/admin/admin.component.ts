@@ -13,6 +13,7 @@ import {
 import { UserIMG, UserModel } from '../../model';
 import { AdminService } from '../../services/api/admin.service';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-admin',
@@ -27,20 +28,18 @@ import { CommonModule } from '@angular/common';
     RouterModule,
     HttpClientModule,
     RouterLink,
-    
   ],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrl: './admin.component.scss',
 })
 export class AdminComponent implements OnInit {
-  userPhoto:UserIMG[]=[];
-  
+  userPhoto: UserIMG[] = [];
+
   user: any;
   Userresult: UserModel[] = [];
   avatar: any;
 
-  constructor(private adminService: AdminService,private router:Router
-  ) {}
+  constructor(private adminService: AdminService, private router: Router) {}
   ngOnInit(): void {
     this.Catdata();
   }
@@ -50,12 +49,11 @@ export class AdminComponent implements OnInit {
   }
 
   async viewuser(uid: number) {
-    const body ={
-      uid:+uid
-    }
-    this.userPhoto=await this.adminService.getUserIMG(body);
+    const body = {
+      uid: +uid,
+    };
+    this.userPhoto = await this.adminService.getUserIMG(body);
     console.log(this.userPhoto);
-    
   }
 
   async Catdata() {
@@ -79,9 +77,8 @@ export class AdminComponent implements OnInit {
   //             </div>
   //         </div>
   //     </div>
-  // </div>` 
+  // </div>`
   //     ,
   //     width: '900px'
   //   });
- }
-
+}
