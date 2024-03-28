@@ -9,6 +9,7 @@ import { PagetopComponent } from './project/pagetop/pagetop.component';
 import { EditimgComponent } from './project/editimg/editimg.component';
 import { ImgrankingComponent } from './project/imgranking/imgranking.component';
 import { PreimgrankComponent } from './project/preimgrank/preimgrank.component';
+import { AdminComponent } from './project/admin/admin.component';
 
 export const routes: Routes = [
     {path: 'login' , component : LoginComponent},
@@ -20,5 +21,7 @@ export const routes: Routes = [
     {path: 'top10' , component : PagetopComponent},
     {path: 'editimg' , component : EditimgComponent },
     {path: 'imgrank' , component : ImgrankingComponent },
-    {path: 'preimg' , component : PreimgrankComponent }
+    {path: 'preimg' , component : PreimgrankComponent },
+    {path: 'admin' , component : AdminComponent}
+    
 ];
