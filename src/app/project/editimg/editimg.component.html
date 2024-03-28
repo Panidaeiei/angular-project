@@ -19,9 +19,19 @@
         </div>
         <div style="display: flex; justify-content: center; margin-top: 50px;">
             <div class="edit">
-                <img class="img" src="/assets/img/excat1.png" alt="">
+                    <a (click)="fileInput.click()">
+                <img class="img" src="{{cat[0].image}}" alt="">
+                   <input #fileInput type="file" (change)="onFileUpdate($event, cat[0].id)" 
+                   accept="image/*" style="display: none;">
+             </a> 
+             <div>
+                <span style="margin-right: 26%; margin-top: 20px;">Name</span>
+                <input type="text" class="input" [(ngModel)]="name" matInput
+                 placeholder="{{ cat[0]?.name }}" id="name" [required]="true" required>
+
+            </div>
                 <div style="display: flex; flex-direction: row;">
-                    <button class="button">
+                    <button (click)="changeImage(id)" class="button">   <!-- <button class="upimg" >upload</button> -->
                         <span>
                             Edit
                         </span>
