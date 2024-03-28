@@ -7,7 +7,7 @@
             style="background-color: transparent; color: aliceblue; border: none; ">
             <span style="font-size: 17px;">Log out</span>
         </button>
-        <button [routerLink]="['/admin']" mat-flat-button style="background-color: transparent; color: aliceblue; border: none; ">
+        <button (click)="reloadPage()"[routerLink]="['/admin']" mat-flat-button style="background-color: transparent; color: aliceblue; border: none; ">
             <span style="font-size: 17px;">Back</span>
         </button>
     </mat-toolbar>

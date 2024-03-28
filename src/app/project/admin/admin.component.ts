@@ -45,6 +45,10 @@ export class AdminComponent implements OnInit {
     this.Catdata();
   }
 
+  reloadPage(): void {
+    window.location.reload(); // Reload the current page
+  }
+
   async viewuser(uid: number) {
     const body ={
       uid:+uid
