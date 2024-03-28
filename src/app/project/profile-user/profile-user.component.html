@@ -33,37 +33,28 @@
                     </button>
                 </div>
 
-                <!-- <div style="display: flex; flex-direction: row; align-items: center;">
-                    <span class="abril-fatface-regular2">Vote : 26k</span>
-                    <mat-icon class="material-symbols-outlined2" style="margin-left: 5px;">
-                        favorite
-                    </mat-icon>
-                </div> -->
-                <!-- ใส่คำแนะนำ -->
-                <!-- <span class="text">birthday : 28/06/2020 American Shorthair</span> -->
 
                 <span class="text">Add up to 5 photos.</span>
             </div>
         </div>
         <hr style="height: 3px; background-color: rgb(255, 255, 255); border: none; margin-top: 10px;  width: 95%;">
 
-        <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 35px; margin-left: 70px;  margin-right: 70px;">
+        <div
+            style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 35px; margin-left: 70px;  margin-right: 70px;">
             <div *ngFor="let i of img" style=" display: flex; flex-direction: row; ">
-                <a (click)="fileInput.click()"><img class="img5" src="{{i.image}}" alt=""></a> 
-                <input #fileInput type="file" (change)="onFileUpdate($event, i.id)" accept="image/*" style="display: none;">
+                <a (click)="fileInput.click()"><img class="img5" src="{{i.image}}" alt=""></a>
+                <input #fileInput type="file" (change)="onFileUpdate($event, i.id)" accept="image/*"
+                    style="display: none;">
             </div>
         </div>
-        
+
 
         <div
             style="display: flex; flex-direction: column; margin-top: 20px; justify-content: center; align-items: center; ">
             <div style="display: flex; flex-wrap: wrap;">
                 <a (click)="fileInput.click()"><img class="imgpro" src="{{user[0]?.avatar}}" alt=""></a>
                 <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
-            </div>	          
-                    <!-- <div style=" margin-left:  -70px;">
-                <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;">	                <!-- <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none;"> -->
-                          <!-- <button class="upimg" (click)="uploadImage()">upload</button> -->
+            </div>
         </div>
 
     </div>

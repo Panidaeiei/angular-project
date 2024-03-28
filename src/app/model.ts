@@ -13,3 +13,10 @@ export interface UserModel {
    password: string;
    type: string;
 }
+export interface UserIMG{
+    id:number;
+    name:string;
+    image:string;
+    score:number;
+    ranking:number;
+}

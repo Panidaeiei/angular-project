@@ -1,0 +1,70 @@
+<<<<<<< Updated upstream
+<div *ngIf="userPhoto.length>0;else pagestart">
+    <mat-toolbar style="height: 70px; background-color: rgb(93, 91, 91);">
+        <a><img style="width: 70px;" src="/assets/img/iconteen.png" alt=""></a>
+        <span style="flex: 1 1 auto;"></span>
+        <button [routerLink]="['/login']" mat-flat-button
+            style="background-color: transparent; color: aliceblue; border: none; ">
+            <span style="font-size: 17px;">Log out</span>
+        </button>
+        <button [routerLink]="['/admin']" mat-flat-button style="background-color: transparent; color: aliceblue; border: none; ">
+            <span style="font-size: 17px;">Back</span>
+        </button>
+    </mat-toolbar>
+
+    <div class="container">
+        <div class="head" style="display: flex; flex-direction: row; justify-content: space-around;">
+            <div *ngFor="let item of userPhoto"
+                style="display: flex; flex-direction: column; align-items: center; margin-top: 100px;">
+                <a href=""><img class="imgpro" src="{{item.image}}" alt="" width="200px" height="200px" style="border-radius: 10px;"></a>
+                <div style="display: flex; flex-direction: row;">
+                    <div style="display: flex; flex-direction: column; margin-left: 20px;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <span class="abril-fatface-regular"></span>
+                            <p>name:{{item.name}}</p>
+                            <span>point:{{item.score}}</span>
+                            <button mat-flat-button style="background-color: rgb(101, 155, 214); color: azure; margin-top: 10px;">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <hr style="height: 3px; background-color: rgb(255, 255, 255); border: none; margin-top: 10px;  width: 95%;"> -->
+        </div>
+    </div>
+</div>
+<ng-template #pagestart>
+    <mat-toolbar style="height: 70px; background-color: rgb(93, 91, 91);">
+        <a><img style="width: 70px;" src="/assets/img/iconteen.png" alt=""></a>
+        <span style="flex: 1 1 auto;"></span>
+        <button [routerLink]="['/login']" mat-flat-button
+            style="background-color: transparent; color: aliceblue; border: none; ">
+            <span style="font-size: 17px;">Log out</span>
+        </button>
+    </mat-toolbar>
+    <div class="container">
+        <div class="adminc">
+            <div style=" display: flex;  flex-direction: column; justify-content: center; align-items: center;">
+                <img style="width: 200px;" src="/assets/img/Namelogo1.png" alt="">
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                    <div *ngFor="let user of Userresult;" class="fim">
+                        <div style="display: flex; flex-direction: row;">
+                            <a [routerLink]="['/showepro']"><img
+                                    style="width: 180px; height: 180px; margin-top: 20px; margin-left: 20px; object-fit: cover; border-radius: 20px;"
+                                    src="{{user.avatar}}" alt=""></a>
+                            <div style="display: flex; flex-direction: column; font-size: 20px;">
+                                <p style="margin-left: 30px;">Name : {{ user.name }}</p>
+                                <span style="margin-left: 30px;">ID : {{ user.id }}</span>
+                                    <button mat-flat-button (click)="viewuser(user.id)"
+                                    style="background-color: rgb(101, 155, 214); margin-left: 150px; color: azure; margin-top: 60px;">View
+                                    Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+=======
+<p>admin works!</p>
+>>>>>>> Stashed changes
