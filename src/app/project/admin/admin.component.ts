@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -13,10 +14,14 @@ import {
 import { UserIMG, UserModel } from '../../model';
 import { AdminService } from '../../services/api/admin.service';
 import { CommonModule } from '@angular/common';
+=======
+import { Component } from '@angular/core';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-admin',
   standalone: true,
+<<<<<<< Updated upstream
   imports: [
     CommonModule,
     RouterOutlet,
@@ -80,4 +85,12 @@ export class AdminComponent implements OnInit {
   //     width: '900px'
   //   });
   // }
+=======
+  imports: [],
+  templateUrl: './admin.component.html',
+  styleUrl: './admin.component.scss'
+})
+export class AdminComponent {
+
+>>>>>>> Stashed changes
 }
