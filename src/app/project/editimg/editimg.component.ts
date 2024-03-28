@@ -35,7 +35,7 @@ export class EditimgComponent implements OnInit {
   id: any;
 cat:any;
 name:any;
-  constructor(private route: ActivatedRoute,private service: CatService,private http: HttpClient) { 
+  constructor(private route: ActivatedRoute,private service: CatService,private http: HttpClient,private router:Router) { 
 //     console.log(this.id);
 //  this.getcat(this.id);
 
@@ -87,4 +87,17 @@ name:any;
       console.warn('No file selected.');
     }
   }
+ 
+
+  async del(id: any) {
+    console.log(id);
+    try {
+        await this.service.Del(id);
+        this.router.navigate(['/profileuser']);
+    } catch (error) {
+        console.error(error); // Log the error
+        // Handle error accordingly, e.g., display error message to user
+    }
+}
+
 }

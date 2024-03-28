@@ -116,10 +116,21 @@ export class CatService {
  
   public async  putDataUser(id: number, formData: FormData): Promise<void> {
     try {
-      await this.http.put<any>(`${this.constants.API_ENDPOINT}/upload/imgUserData`, formData).toPromise();
-
+      await this.http.put<any>(`${this.constants.API_ENDPOINT}/upload/img/Data`, formData).toPromise();
+        console.log('from service');
     } catch (error) {
       throw new Error('Failed to upload image: ');
     }
   }
+
+  public async Del(id: any): Promise<void> {
+    try {
+        await this.http.delete<any>(`${this.constants.API_ENDPOINT}/remove/${id}`).toPromise();
+    } catch (error) {
+        throw new Error('Failed to delete data: ' ); // Consider a more specific error message
+    }
+}
+
+  
+  
 }

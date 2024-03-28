@@ -42,6 +42,7 @@ ngOnInit(): void {
     this.name = this.user[0].name;
     this.password = this.user[0].password;
     this.email = this.user[0].email;
+    this.avatar = this.user[0].avatar;
     return this.user;
   }
 
@@ -51,36 +52,44 @@ ngOnInit(): void {
 
   
   async changeImage(id: any) {
-    console.log('user',id);
     if (this.uploadFile) {
-      const formData = new FormData();
-      formData.append('file', this.uploadFile);
-      formData.append('id', id);
-      formData.append('name', this.name);
-      formData.append('email', this.email);
-      formData.append('password', this.password);
-      try {
-      await this.service.putimgUser(id, formData);
-        console.log('Image upload successful');
-        // window.location.reload();
-      } catch (error) {
-        console.error('Error uploading image:', error);
-      }
+        // กรณีมีการอัปโหลดรูปภาพใหม่
+        const formData = new FormData();
+        formData.append('file', this.uploadFile);
+        formData.append('id', id);
+        formData.append('name', this.name);
+        formData.append('email', this.email);
+        formData.append('password', this.password);
+        try {
+            await this.service.putimgUser(id, formData);
+            console.log('Image upload successful');
+            // window.location.reload();
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        }
     } else {
-      const formData = new FormData();
-      console.log(this.user[0].avatar);
-      formData.append('avatar', this.user[0].avatar);
-      formData.append('id', this.user[0].id);
-      formData.append('name', this.name);
-      formData.append('email', this.email);
-      formData.append('password', this.password);
-      try {
-      await this.service.putDataUser(id, formData);
-        console.log('Image upload successful ');
-        // window.location.reload();
-      } catch (error) {
-        console.error('Error uploading image:', error);
-      }
+        // กรณีไม่มีการอัปโหลดรูปภาพใหม่
+        const formData = new FormData();
+        formData.append('avatar', this.avatar); // ส่งรูปภาพเดิมกลับไป
+        formData.append('id', id);
+        formData.append('name', this.name);
+        formData.append('email', this.email);
+        formData.append('password', this.password);
+        console.log(this.avatar);
+        console.log(id);
+        console.log(this.name);
+        console.log(this.email);
+        console.log(this.password);
+
+        try {
+          
+            await this.service.putDataUser(id, formData);
+            console.log('Data update successful');
+            // window.location.reload();
+        } catch (error) {
+            console.error('Error updating data:', error);
+        }
     }
-  }
+}
+
 }

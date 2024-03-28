@@ -31,12 +31,12 @@
 
             </div>
                 <div style="display: flex; flex-direction: row;">
-                    <button (click)="changeImage(id)" class="button">   <!-- <button class="upimg" >upload</button> -->
+                    <button (click)="changeImage(cat[0].id)" class="button">   <!-- <button class="upimg" >upload</button> -->
                         <span>
                             Edit
                         </span>
                     </button>
-                    <button class="button2">
+                    <button (click)="del(cat[0].id)" class="button2">
                         <span>
                             Delete
                         </span>

@@ -54,7 +54,7 @@ ngOnInit(): void {
 
 async check(name: any, password: any) {
   const user = await this.service.checklogin(name, password);
-  if (user) {
+  if (user.length == 1) {
     this.service.setUserInLocalStorage(user); // เก็บข้อมูลผู้ใช้ใน Local Storage
     this.router.navigate(['/user']);
   } else {
