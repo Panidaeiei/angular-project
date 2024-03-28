@@ -90,6 +90,7 @@ ngOnInit(): void {
             console.error('Error updating data:', error);
         }
     }
+
 }
 
 }

@@ -86,6 +86,7 @@ name:any;
     } else {
       console.warn('No file selected.');
     }
+      window.location.reload(); // Reload the current page
   }
  
 
