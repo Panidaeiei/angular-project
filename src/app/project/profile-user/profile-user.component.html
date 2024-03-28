@@ -41,13 +41,13 @@
 
 
         <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 35px; margin-left: 70px;  margin-right: 70px;">
-            <div *ngFor="let i of img" style="display: flex; flex-direction: row;">
+            <div *ngFor="let i of img" style="display: flex; flex-direction: column;">
                 <!-- <div [routerLink]="['/editimg']" [queryParams]="{ id: i.id }" routerLinkActive="router-link-active">
                 </div> -->
-                <a  [routerLink]="['/editimg']" [queryParams]="{ id: i.id }" routerLinkActive="router-link-active"><img class="img5" src="{{i.image}}" alt="">
-
-                </a> 
-            <!--     <input #fileInput type="file" (change)="onFileUpdate($event, i.id)" accept="image/*" style="display: none;"> -->
+                <a  [routerLink]="['/editimg']" [queryParams]="{ id: i.id }" routerLinkActive="router-link-active"><img class="img5" src="{{i.image}}" alt=""></a> 
+                <div style="display: flex; font-size: 20px; justify-content: center; color: aliceblue;">
+                   <span>{{i.score}}❤️</span> 
+                </div>
             </div>
             
         </div>
