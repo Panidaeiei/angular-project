@@ -21,19 +21,19 @@
                 Username
             </span>
                <input type="text" class="input" [(ngModel)]="name" [ngModelOptions]="{standalone : true}"
-                matInput placeholder="{{user[0].name}}" id="name" [required]="true" required>
+                matInput placeholder="{{user[0]?.name}}" id="name" [required]="true" required>
 
             <span style="margin-right: 41%; margin-top: 30px;">
                New password
             </span>
             <input type="text" class="input" [(ngModel)]="password" [ngModelOptions]="{standalone : true}"
-            matInput placeholder="{{user[0].password}}" id="password" [required]="true" required>
+            matInput placeholder="{{user[0]?.password}}" id="password" [required]="true" required>
 
             <span style="margin-right: 41%; margin-top: 30px;">
                 Email
              </span>
              <input type="email" class="input" [(ngModel)]="email" [ngModelOptions]="{standalone : true}"
-             matInput placeholder="{{user[0].email}}" id="email" [required]="true" required>
+             matInput placeholder="{{user[0]?.email}}" id="email" [required]="true" required>
             <!-- <span style="margin-right: 46%; margin-top: 30px;">
                 New password
             </span>

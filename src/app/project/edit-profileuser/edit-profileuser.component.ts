@@ -52,45 +52,66 @@ ngOnInit(): void {
 
   
   async changeImage(id: any) {
-    if (this.uploadFile) {
-        // กรณีมีการอัปโหลดรูปภาพใหม่
-        const formData = new FormData();
-        formData.append('file', this.uploadFile);
-        formData.append('id', id);
-        formData.append('name', this.name);
-        formData.append('email', this.email);
-        formData.append('password', this.password);
-        try {
-            await this.service.putimgUser(id, formData);
-            console.log('Image upload successful');
-            // window.location.reload();
-        } catch (error) {
-            console.error('Error uploading image:', error);
-        }
-    } else {
-        // กรณีไม่มีการอัปโหลดรูปภาพใหม่
-        const formData = new FormData();
-        formData.append('avatar', this.avatar); // ส่งรูปภาพเดิมกลับไป
-        formData.append('id', id);
-        formData.append('name', this.name);
-        formData.append('email', this.email);
-        formData.append('password', this.password);
-        console.log(this.avatar);
-        console.log(id);
-        console.log(this.name);
-        console.log(this.email);
-        console.log(this.password);
-
-        try {
-          
-            await this.service.putDataUser(id, formData);
-            console.log('Data update successful');
-            // window.location.reload();
-        } catch (error) {
-            console.error('Error updating data:', error);
-        }
+    if (!this.name || !this.email || !this.password) {
+      // แสดงข้อความแจ้งเตือน
+      return;
     }
-
+  
+    if (this.uploadFile) {
+      // กรณีมีการอัปโหลดรูปภาพใหม่
+      const formData = new FormData();
+      formData.append('file', this.uploadFile);
+      formData.append('id', id);
+      formData.append('name', this.name);
+      formData.append('email', this.email);
+      formData.append('password', this.password);
+  
+      try {
+        await this.service.putimgUser(id, formData);
+        console.log('Image upload successful');
+        // window.location.reload();
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        // แสดงข้อความแจ้งเตือน
+      }
+    // } else {
+    //   // กรณีไม่มีการอัปโหลดรูปภาพใหม่
+    //   const formData = new FormData();
+    //   formData.append('avatar', this.avatar); // ส่งรูปภาพเดิมกลับไป
+    //   formData.append('id', id);
+    //   formData.append('name', this.name);
+    //   formData.append('email', this.email);
+    //   formData.append('password', this.password);
+  
+    //   try {
+    //     await this.service.putDataUser(id, formData);
+    //     console.log('Data update successful');
+    //     // window.location.reload();
+    //   } catch (error) {
+    //     console.error('Error updating data:', error);
+    //     // แสดงข้อความแจ้งเตือน
+    //   }
+    // }
+  }
+  if (!this.uploadFile) {
+    
+    const formData = new FormData();
+    formData.append('avatar', this.avatar); // ส่งรูปภาพเดิมกลับไป
+    formData.append('id', id);
+    formData.append('name', this.name);
+    formData.append('email', this.email);
+    formData.append('password', this.password);
+  
+    try {
+      await this.service.putDataUser(id, formData);
+      console.log('Data update successful');
+      // window.location.reload();
+    } catch (error) {
+      console.error('Error updating data:', error);
+      // แสดงข้อความแจ้งเตือน
+    }
+  }
+  
 }
 
 }

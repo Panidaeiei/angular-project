@@ -20,7 +20,7 @@
         <div style="display: flex; justify-content: center; margin-top: 50px;">
             <div class="edit">
                     <a (click)="fileInput.click()">
-                <img class="img" src="{{cat[0].image}}" alt="">
+                <img class="img" src="{{cat[0]?.image}}" alt="">
                    <input #fileInput type="file" (change)="onFileUpdate($event, cat[0].id)" 
                    accept="image/*" style="display: none;">
              </a> 
@@ -41,6 +41,12 @@
                             Delete
                         </span>
                     </button>
+                    <button [routerLink]="['/preimg']">
+                        <span>
+                            View
+                        </span>
+                    </button>
+                    
                 </div>
             </div>
         </div>

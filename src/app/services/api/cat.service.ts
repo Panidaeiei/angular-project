@@ -79,6 +79,14 @@ export class CatService {
     }
   }
 
+  public async putimg2(id: number, formData: FormData): Promise<void> {
+    try {
+      await this.http.put<any>(`${this.constants.API_ENDPOINT}/addcat/img3`, formData).toPromise();
+    } catch (error) {
+      throw new Error('Failed to upload image: ');
+    }
+  }
+
   public async uploadImage(formData: FormData): Promise<void> {
     try {
       await this.http.post<any>(`${this.constants.API_ENDPOINT}/upload/img`, formData).toPromise();
@@ -114,14 +122,30 @@ export class CatService {
     }
   }
  
-  public async  putDataUser(id: number, formData: FormData): Promise<void> {
-    try {
-      await this.http.put<any>(`${this.constants.API_ENDPOINT}/upload/img/Data`, formData).toPromise();
-        console.log('from service');
-    } catch (error) {
-      throw new Error('Failed to upload image: ');
-    }
+//   public async putDataUser(id: number, formData: FormData): Promise<void> {
+//     try {
+//         await this.http.put<any>(`${this.constants.API_ENDPOINT}/upload/imgData`, formData).toPromise();
+//         console.log('Data update successful');
+//     } catch (error) {
+//         console.error('Error updating user data:', error);
+//         throw new Error('Failed to update user data');
+//     }
+// }
+async putDataUser(id: number, formData: FormData): Promise<void> {
+  try {
+    // Loop through formData entries and log key-value pairs
+    formData.forEach((value, key) => {
+      console.log(`Key: ${key}, Value: ${value}`);
+    });
+
+    await this.http.put<any>(`${this.constants.API_ENDPOINT}/addcat/img`, formData).toPromise();
+    console.log('Data update successful');
+  } catch (error) {
+    console.error('Error updating user data:', error);
+    throw new Error('Failed to update user data');
   }
+}
+
 
   public async Del(id: any): Promise<void> {
     try {

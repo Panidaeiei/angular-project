@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Router, RouterLink } from '@angular/router';
-import { CatModel } from '../../model';
 import { CatService } from '../../services/api/cat.service';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -13,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { HttpClient,HttpClientModule } from '@angular/common/http';
+
 
 CommonModule
 @Component({
@@ -26,7 +26,7 @@ CommonModule
     MatToolbarModule,
     RouterModule,
     RouterLink,
-    RouterOutlet, MatInputModule , MatFormFieldModule,MatListModule, FormsModule,HttpClientModule
+    RouterOutlet, MatInputModule , MatFormFieldModule,MatListModule, FormsModule,HttpClientModule,
   ],
   templateUrl: './editimg.component.html',
   styleUrl: './editimg.component.scss'
@@ -35,6 +35,7 @@ export class EditimgComponent implements OnInit {
   id: any;
 cat:any;
 name:any;
+image:any;
   constructor(private route: ActivatedRoute,private service: CatService,private http: HttpClient,private router:Router) { 
 //     console.log(this.id);
 //  this.getcat(this.id);
@@ -56,7 +57,7 @@ name:any;
     this.cat = await this.service.get1cat(id);
     console.log(this.cat[0].name);
     this.name = this.cat[0].name;
-    
+    this.image = this.cat[0].image;
     return this.cat[0];
    }
 
@@ -84,12 +85,24 @@ name:any;
         console.error('Error uploading image:', error);
       }
     } else {
-      console.warn('No file selected.');
-    }
+      
+        const formData = new FormData();
+        formData.append('image', this.image);
+        formData.append('id', id);
+        formData.append('name', this.name);
+        console.log('f2', id);
+        try {
+          await this.service.putimg2(id, formData);
+          console.log('Image upload successful');
+          window.location.reload(); 
+        } catch (error) {
+          console.error('Error uploading image:', error);
+        }
+    
       window.location.reload(); // Reload the current page
   }
  
-
+  }
   async del(id: any) {
     console.log(id);
     try {
@@ -100,5 +113,7 @@ name:any;
         // Handle error accordingly, e.g., display error message to user
     }
 }
+
+
 
 }
